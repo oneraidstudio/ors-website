@@ -15,6 +15,7 @@
   --red: #ff2a3d;
   --red-soft: #ff2a3d22;
   --red-glow: 0 0 24px rgba(255, 42, 61, 0.45), 0 0 60px rgba(255, 42, 61, 0.18);
+  --red-glow-card: 0 0 24px rgba(255, 42, 61, 0.315), 0 0 60px rgba(255, 42, 61, 0.126);
   --red-glow-soft: 0 0 14px rgba(255, 42, 61, 0.35);
   --shadow-card: 0 1px 0 rgba(255,255,255,0.03) inset, 0 20px 40px -20px rgba(0,0,0,0.6);
   --pad-x: clamp(18px, 4vw, 56px);
@@ -224,15 +225,15 @@ body.intro-lock { overflow: hidden; }
 }
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: var(--red-glow);
+  box-shadow: var(--red-glow-soft);
   animation-play-state: paused;
 }
 .btn-primary:active { transform: translateY(0); }
 
 /* breathing glow for all Discord CTAs (#4) */
 @keyframes breathe {
-  0%, 100% { box-shadow: 0 0 10px rgba(255, 42, 61, 0.28), 0 0 0 rgba(255, 42, 61, 0); }
-  50% { box-shadow: 0 0 22px rgba(255, 42, 61, 0.6), 0 0 44px rgba(255, 42, 61, 0.22); }
+  0%, 100% { box-shadow: 0 0 6px rgba(255, 42, 61, 0.16); }
+  50% { box-shadow: 0 0 12px rgba(255, 42, 61, 0.3), 0 0 22px rgba(255, 42, 61, 0.1); }
 }
 
 .btn-ghost {
@@ -496,7 +497,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
   font-family: var(--display);
   font-style: italic;
   font-weight: 400;
-  font-size: clamp(20px, 2.6vw, 30px);
+  font-size: clamp(16px, 1.8vw, 21px);
   letter-spacing: -0.01em;
   color: var(--text-dim);
   margin: 0 0 40px;
@@ -612,7 +613,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 }
 .card:hover {
   border-color: var(--red);
-  box-shadow: var(--red-glow);
+  box-shadow: var(--red-glow-card);
   animation: cardFloat 3.2s ease-in-out infinite;
 }
 .card:hover::before { opacity: 1; }
@@ -657,10 +658,17 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 .card-icon svg { width: 100%; height: 100%; display: block; overflow: visible; }
 
 /* icon hover animations (#11) */
-.card:hover .icon-3d { animation: spin3d 3.6s linear infinite; transform-origin: 32px 28px; }
-@keyframes spin3d {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* 3D box opens (lid lifts + hinges back) then closes, looping (#7) */
+.card:hover .lid-3d {
+  animation: lidOpen 2.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+@keyframes lidOpen {
+  0%   { transform: translateY(0) rotateX(0deg); }
+  35%  { transform: translateY(-12px) rotateX(-32deg); }
+  60%  { transform: translateY(-12px) rotateX(-32deg); }
+  100% { transform: translateY(0) rotateX(0deg); }
 }
 .card:hover .icon-pixel rect { animation: pixelBlink 1.4s steps(1) infinite; }
 .card:hover .icon-pixel rect:nth-child(2n) { animation-delay: 0.2s; }
@@ -743,7 +751,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 .project-card:hover {
   transform: translateY(-4px);
   border-color: var(--red);
-  box-shadow: var(--red-glow);
+  box-shadow: var(--red-glow-card);
 }
 .project-thumb {
   aspect-ratio: 16 / 10;
@@ -759,6 +767,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
   pointer-events: none;
 }
 .project-free {
+  z-index: 3;
   position: absolute;
   top: 14px; right: 14px;
   font-family: var(--mono);
@@ -850,7 +859,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 .work-card:hover {
   transform: translateY(-4px);
   border-color: var(--red);
-  box-shadow: var(--red-glow);
+  box-shadow: var(--red-glow-card);
 }
 .work-thumb {
   aspect-ratio: 4 / 3;
@@ -867,6 +876,15 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 }
 .work-card:hover .work-thumb-inner { transform: scale(1.04); }
 .work-thumb svg { width: 100%; height: 100%; display: block; }
+/* drop a real cover image in later: add <img class="work-cover" src="..."> inside .work-thumb-inner (#5) */
+.work-cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .work-thumb-overlay {
   position: absolute;
   inset: 0;
@@ -988,7 +1006,7 @@ body.ready .hero-rise:nth-child(5) { animation-delay: 480ms; }
 }
 .discord-cta:hover {
   transform: translateY(-2px);
-  box-shadow: var(--red-glow);
+  box-shadow: var(--red-glow-soft);
   animation-play-state: paused;
 }
 .discord-cta .label {
