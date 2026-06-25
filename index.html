@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>One Raid Studio — One Complete Solution</title>
+<meta name="description" content="One Raid Studio — 3D models, pixel art, and development built for Minecraft and Hytale servers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0a0c'/%3E%3Crect x='3' y='3' width='10' height='10' fill='%23ff2a3d'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="intro-lock">
+
+<!-- ============== INTRO ============== -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-grid">
+    <span></span><span class="red"></span><span></span>
+    <span class="red"></span><span></span><span class="red"></span>
+    <span></span><span class="red"></span><span></span>
+  </div>
+  <div class="intro-word">One Raid Studio</div>
+</div>
+
+<!-- ============== SCROLL PROGRESS ============== -->
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<!-- ============== NAV ============== -->
+<div class="nav-wrap" id="navWrap">
+  <div class="container">
+    <nav class="nav" aria-label="Primary">
+      <a href="#top" class="logo" aria-label="One Raid Studio — home">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">ONE RAID <em>/ STUDIO</em></span>
+      </a>
+      <div class="nav-links" role="navigation">
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#contact" class="btn btn-primary magnetic" data-magnetic="0.3" aria-label="Join our Discord">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3.2a.074.074 0 0 0-.079.037c-.34.604-.719 1.388-.984 2.007a18.27 18.27 0 0 0-5.487 0 12.683 12.683 0 0 0-.997-2.007.077.077 0 0 0-.079-.037A19.79 19.79 0 0 0 5.18 4.369a.07.07 0 0 0-.032.027C2.07 9.045 1.25 13.58 1.65 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.225-1.994a.076.076 0 0 0-.042-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.245.198.372.292a.077.077 0 0 1-.006.128 12.298 12.298 0 0 1-1.873.891.077.077 0 0 0-.041.107c.36.699.772 1.364 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.029.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.42-2.157 2.42z"/></svg>
+          <span class="nav-discord-label">Join Discord</span>
+        </a>
+        <button class="nav-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileMenu">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero-grid" data-parallax="0.06" aria-hidden="true"></div>
+
+  <div class="container hero-inner">
+    <div class="hero-tag hero-rise">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Creating for · Minecraft · Hytale</span>
+    </div>
+    <h1 class="hero-title hero-rise">
+      <span class="accent">One Raid</span><br/>
+      Studio<span class="period" aria-hidden="true"></span>
+    </h1>
+    <p class="hero-tagline hero-rise">&ldquo;One Complete Solution&rdquo;</p>
+    <div class="hero-ctas hero-rise">
+      <a href="#contact" class="btn btn-primary btn-lg magnetic" data-magnetic="0.25">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3.2a.074.074 0 0 0-.079.037c-.34.604-.719 1.388-.984 2.007a18.27 18.27 0 0 0-5.487 0 12.683 12.683 0 0 0-.997-2.007.077.077 0 0 0-.079-.037A19.79 19.79 0 0 0 5.18 4.369a.07.07 0 0 0-.032.027C2.07 9.045 1.25 13.58 1.65 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.225-1.994a.076.076 0 0 0-.042-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.245.198.372.292a.077.077 0 0 1-.006.128 12.298 12.298 0 0 1-1.873.891.077.077 0 0 0-.041.107c.36.699.772 1.364 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.029.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.42-2.157 2.42z"/></svg>
+        Join Discord
+      </a>
+      <a href="#work" class="btn btn-ghost btn-lg">
+        Discover our Work
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-meta hero-rise">
+      <span><strong>3D Design</strong></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span><strong>Pixel Art</strong></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span><strong>Development</strong></span>
+      <span class="sep" aria-hidden="true"></span>
+      <span>For those who want the Finest</span>
+    </div>
+  </div>
+
+  <div class="scroll-cube" aria-hidden="true">
+    <span>SCROLL</span>
+    <span class="sc-cube"></span>
+  </div>
+</section>
+
+<!-- ============== SERVICES ============== -->
+<section class="section" id="services" data-screen-label="02 Services">
+  <div class="container">
+    <div class="services-head reveal">
+      <div>
+        <p class="eyebrow">01 / Services</p>
+        <h2 class="section-heading reveal-words">What we create.</h2>
+      </div>
+      <p class="section-intro">Your Concept, Our Expertise.</p>
+    </div>
+
+    <div class="cards services-cards">
+      <!-- Card 1 -->
+      <article class="card reveal">
+        <div class="card-num">
+          <span>01 — 3D DESIGN</span>
+          <span class="tag">Blockbench</span>
+        </div>
+        <div class="card-icon" aria-hidden="true">
+          <svg class="icon-3d" viewBox="0 0 64 64" fill="none">
+            <g stroke="#ff2a3d" stroke-width="1.5" stroke-linejoin="miter">
+              <path d="M32 8 L52 18 L32 28 L12 18 Z" fill="#ff2a3d22"/>
+              <path d="M12 18 L12 38 L32 48 L32 28 Z" fill="#ff2a3d11"/>
+              <path d="M52 18 L52 38 L32 48 L32 28 Z" fill="#ff2a3d33"/>
+            </g>
+            <g stroke="#fff" stroke-opacity="0.5" stroke-width="1">
+              <path d="M22 23 L22 43"/>
+              <path d="M42 23 L42 43"/>
+              <path d="M32 28 L32 48"/>
+            </g>
+          </svg>
+        </div>
+        <h3 class="card-title">3D Design</h3>
+        <p class="card-summary">Custom 3D models and cosmetics for Minecraft and Hytale servers.</p>
+        <ul class="card-list">
+          <li>Player cosmetics</li>
+          <li>Hats &amp; accessories</li>
+          <li>Weapons &amp; tools</li>
+          <li>Mobs &amp; characters</li>
+          <li>Props &amp; decorative models</li>
+          <li>... whatever you imagine!</li>
+        </ul>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card reveal">
+        <div class="card-num">
+          <span>02 — 2D / PIXEL ART</span>
+          <span class="tag">Aseprite · Photoshop</span>
+        </div>
+        <div class="card-icon" aria-hidden="true">
+          <svg class="icon-pixel" viewBox="0 0 64 64" fill="none">
+            <rect x="8" y="8" width="12" height="12" fill="#ff2a3d"/>
+            <rect x="22" y="8" width="12" height="12" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="36" y="8" width="12" height="12" fill="#ff2a3d22" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="8" y="22" width="12" height="12" fill="#ff2a3d22" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="22" y="22" width="12" height="12" fill="#ff2a3d"/>
+            <rect x="36" y="22" width="12" height="12" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="50" y="22" width="6" height="12" fill="#ff2a3d22" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="8" y="36" width="12" height="12" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="22" y="36" width="12" height="12" fill="#ff2a3d22" stroke="#ff2a3d" stroke-width="1"/>
+            <rect x="36" y="36" width="12" height="12" fill="#ff2a3d"/>
+            <rect x="22" y="50" width="12" height="6" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="1"/>
+          </svg>
+        </div>
+        <h3 class="card-title">2D / Pixel Art</h3>
+        <p class="card-summary">Pixel art for every surface of your server.</p>
+        <ul class="card-list">
+          <li>GUI menus &amp; HUDs</li>
+          <li>Nametags &amp; rank icons</li>
+          <li>Item textures</li>
+          <li>Banners &amp; server icons</li>
+          <li>UI sprite sheets</li>
+        </ul>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card reveal">
+        <div class="card-num">
+          <span>03 — DEVELOPMENT</span>
+          <span class="tag">Python · TypeScript · Java</span>
+        </div>
+        <div class="card-icon" aria-hidden="true">
+          <svg class="icon-node" viewBox="0 0 64 64" fill="none">
+            <g stroke="#fff" stroke-opacity="0.4" stroke-width="1">
+              <path d="M14 14 L32 32 L50 14"/>
+              <path d="M14 50 L32 32 L50 50"/>
+              <path d="M14 14 L14 50"/>
+              <path d="M50 14 L50 50"/>
+            </g>
+            <rect class="node-dot" x="9" y="9" width="10" height="10" fill="#ff2a3d"/>
+            <rect class="node-dot" x="45" y="9" width="10" height="10" fill="#ff2a3d"/>
+            <rect class="node-dot" x="27" y="27" width="10" height="10" fill="#ff2a3d"/>
+            <rect class="node-dot" x="9" y="45" width="10" height="10" fill="#ff2a3d"/>
+            <rect class="node-dot" x="45" y="45" width="10" height="10" fill="#ff2a3d"/>
+            <g fill="#0a0a0c">
+              <rect x="11" y="11" width="6" height="6"/>
+              <rect x="47" y="11" width="6" height="6"/>
+              <rect x="29" y="29" width="6" height="6"/>
+              <rect x="11" y="47" width="6" height="6"/>
+              <rect x="47" y="47" width="6" height="6"/>
+            </g>
+          </svg>
+        </div>
+        <h3 class="card-title">Development</h3>
+        <p class="card-summary">Autonomous systems that handle the mundane so your team can ship.</p>
+        <ul class="card-list">
+          <li>Discord bots</li>
+          <li>Server Management Tools</li>
+          <li>Deployment pipelines</li>
+          <li>Workflow automation</li>
+          <li>Custom integrations</li>
+          <li>Bespoke tooling</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============== PROJECTS ============== -->
+<section class="section" id="projects" data-screen-label="03 Projects" style="background: linear-gradient(180deg, transparent, rgba(255,255,255,0.015) 50%, transparent);">
+  <div class="container">
+    <div class="work-head reveal">
+      <div>
+        <p class="eyebrow">02 / Projects</p>
+        <h2 class="section-heading reveal-words">Projects</h2>
+      </div>
+      <p class="section-intro">Packs and releases from the studio — grab them and drop them straight into your server.</p>
+    </div>
+
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <a href="#" target="_blank" rel="noopener" class="project-card reveal" aria-label="All Your Iconz">
+        <div class="project-thumb">
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="400" height="250" fill="#0e0e13"/>
+            <g>
+              <rect x="40"  y="50"  width="40" height="40" fill="#ff2a3d"/>
+              <rect x="100" y="50"  width="40" height="40" fill="#23232c" stroke="#ff2a3d"/>
+              <rect x="160" y="50"  width="40" height="40" fill="#ff2a3d33" stroke="#ff2a3d"/>
+              <rect x="220" y="50"  width="40" height="40" fill="#23232c" stroke="#ff2a3d"/>
+              <rect x="280" y="50"  width="40" height="40" fill="#ff2a3d" opacity="0.6"/>
+              <rect x="40"  y="110" width="40" height="40" fill="#23232c" stroke="#ff2a3d"/>
+              <rect x="100" y="110" width="40" height="40" fill="#ff2a3d"/>
+              <rect x="160" y="110" width="40" height="40" fill="#23232c" stroke="#ff2a3d"/>
+              <rect x="220" y="110" width="40" height="40" fill="#ff2a3d33" stroke="#ff2a3d"/>
+              <rect x="280" y="110" width="40" height="40" fill="#23232c" stroke="#ff2a3d"/>
+            </g>
+          </svg>
+          <div class="project-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="project-meta">
+          <span class="project-cat">Icon Pack</span>
+          <h3 class="project-title">All Your Iconz</h3>
+          <p class="project-desc">A collection of 100+ icons for Minecraft.</p>
+          <span class="project-link">View project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Project 2 -->
+      <a href="#" target="_blank" rel="noopener" class="project-card reveal" aria-label="All Your Meme Emojis">
+        <div class="project-thumb">
+          <span class="project-free">Free</span>
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="400" height="250" fill="#0e0e13"/>
+            <g>
+              <circle cx="100" cy="90" r="34" fill="#ff2a3d"/>
+              <circle cx="90" cy="82" r="5" fill="#0a0a0c"/>
+              <circle cx="112" cy="82" r="5" fill="#0a0a0c"/>
+              <path d="M84 100 Q100 116 116 100" stroke="#0a0a0c" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <circle cx="210" cy="120" r="42" fill="#23232c" stroke="#ff2a3d" stroke-width="2"/>
+              <circle cx="198" cy="110" r="6" fill="#ff2a3d"/>
+              <circle cx="224" cy="110" r="6" fill="#ff2a3d"/>
+              <path d="M192 132 Q210 122 228 132" stroke="#ff2a3d" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <circle cx="312" cy="86" r="30" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="2"/>
+              <circle cx="304" cy="80" r="4" fill="#ff2a3d"/>
+              <circle cx="320" cy="80" r="4" fill="#ff2a3d"/>
+              <path d="M300 94 Q312 104 324 94" stroke="#ff2a3d" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="project-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="project-meta">
+          <span class="project-cat">Emoji Pack</span>
+          <h3 class="project-title">All Your Meme Emojis</h3>
+          <p class="project-desc">A collection of 45 emojis, completely FREE!</p>
+          <span class="project-link">View project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Project 3 -->
+      <a href="#" target="_blank" rel="noopener" class="project-card reveal" aria-label="All Your Hamster Emojis">
+        <div class="project-thumb">
+          <span class="project-free">Free</span>
+          <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <rect width="400" height="250" fill="#0e0e13"/>
+            <g transform="translate(200 125)">
+              <ellipse cx="0" cy="6" rx="64" ry="56" fill="#23232c" stroke="#ff2a3d" stroke-width="2"/>
+              <circle cx="-44" cy="-40" r="18" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="2"/>
+              <circle cx="44" cy="-40" r="18" fill="#ff2a3d33" stroke="#ff2a3d" stroke-width="2"/>
+              <circle cx="-22" cy="-4" r="7" fill="#0a0a0c"/>
+              <circle cx="22" cy="-4" r="7" fill="#0a0a0c"/>
+              <circle cx="0" cy="16" r="6" fill="#ff2a3d"/>
+              <path d="M-14 28 Q0 38 14 28" stroke="#0a0a0c" stroke-width="3" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <div class="project-thumb-overlay" aria-hidden="true"></div>
+        </div>
+        <div class="project-meta">
+          <span class="project-cat">Emoji Pack</span>
+          <h3 class="project-title">All Your Hamster Emojis</h3>
+          <p class="project-desc">A collection of 25 popular hamster emojis, completely FREE!</p>
+          <span class="project-link">View project
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== WORK ============== -->
+<section class="section" id="work" data-screen-label="04 Work">
+  <div class="container">
+    <div class="work-head reveal">
+      <div>
+        <p class="eyebrow">03 / Work</p>
+        <h2 class="section-heading reveal-words">Portfolio</h2>
+      </div>
+      <p class="section-intro">Click on a category to view full portfolio.</p>
+    </div>
+
+    <div class="work-grid">
+      <a href="work/3d-design.html" class="work-card reveal" aria-label="3D Design portfolio">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <pattern id="dots3d" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <rect x="7" y="7" width="2" height="2" fill="#ffffff" opacity="0.08"/>
+                </pattern>
+              </defs>
+              <rect width="400" height="300" fill="#0e0e13"/>
+              <rect width="400" height="300" fill="url(#dots3d)"/>
+              <g transform="translate(200 150)">
+                <path d="M0 -70 L70 -35 L0 0 L-70 -35 Z" fill="#1a1a22" stroke="#2e2e36"/>
+                <path d="M-70 -35 L-70 35 L0 70 L0 0 Z" fill="#101016" stroke="#2e2e36"/>
+                <path d="M70 -35 L70 35 L0 70 L0 0 Z" fill="#23232c" stroke="#2e2e36"/>
+                <path d="M-35 -52 L0 -34 L-35 -17 L-70 -35 Z" fill="#ff2a3d" opacity="0.85"/>
+              </g>
+            </svg>
+          </div>
+          <div class="work-thumb-overlay"></div>
+          <div class="work-thumb-corner">3D Design</div>
+        </div>
+        <div class="work-meta">
+          <div>
+            <h3 class="work-title">3D Design</h3>
+            <p class="work-caption">Models, rigs and cosmetics</p>
+          </div>
+          <span class="work-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="work/pixel-art.html" class="work-card reveal" aria-label="Pixel Art portfolio">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="300" fill="#0e0e13"/>
+              <g transform="translate(120 70)">
+                <rect x="0"   y="0"   width="20" height="20" fill="#23232c"/>
+                <rect x="20"  y="0"   width="20" height="20" fill="#1a1a22"/>
+                <rect x="40"  y="0"   width="20" height="20" fill="#ff2a3d"/>
+                <rect x="60"  y="0"   width="20" height="20" fill="#23232c"/>
+                <rect x="80"  y="0"   width="20" height="20" fill="#1a1a22"/>
+                <rect x="100" y="0"   width="20" height="20" fill="#23232c"/>
+                <rect x="120" y="0"   width="20" height="20" fill="#ff2a3d" opacity="0.6"/>
+                <rect x="140" y="0"   width="20" height="20" fill="#1a1a22"/>
+                <rect x="0"   y="20"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="20"  y="20"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="40"  y="20"  width="20" height="20" fill="#ff2a3d" opacity="0.7"/>
+                <rect x="60"  y="20"  width="20" height="20" fill="#2a2a34"/>
+                <rect x="80"  y="20"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="100" y="20"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="120" y="20"  width="20" height="20" fill="#23232c"/>
+                <rect x="140" y="20"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="0"   y="40"  width="20" height="20" fill="#23232c"/>
+                <rect x="20"  y="40"  width="20" height="20" fill="#ff2a3d" opacity="0.6"/>
+                <rect x="40"  y="40"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="60"  y="40"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="80"  y="40"  width="20" height="20" fill="#ff2a3d" opacity="0.6"/>
+                <rect x="100" y="40"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="120" y="40"  width="20" height="20" fill="#23232c"/>
+                <rect x="140" y="40"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="0"   y="60"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="20"  y="60"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="40"  y="60"  width="20" height="20" fill="#ff2a3d" opacity="0.5"/>
+                <rect x="60"  y="60"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="80"  y="60"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="100" y="60"  width="20" height="20" fill="#23232c"/>
+                <rect x="120" y="60"  width="20" height="20" fill="#ff2a3d" opacity="0.7"/>
+                <rect x="140" y="60"  width="20" height="20" fill="#23232c"/>
+                <rect x="0"   y="80"  width="20" height="20" fill="#23232c"/>
+                <rect x="20"  y="80"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="40"  y="80"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="60"  y="80"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="80"  y="80"  width="20" height="20" fill="#ff2a3d"/>
+                <rect x="100" y="80"  width="20" height="20" fill="#ff2a3d" opacity="0.6"/>
+                <rect x="120" y="80"  width="20" height="20" fill="#1a1a22"/>
+                <rect x="140" y="80"  width="20" height="20" fill="#23232c"/>
+              </g>
+            </svg>
+          </div>
+          <div class="work-thumb-overlay"></div>
+          <div class="work-thumb-corner">Pixel Art</div>
+        </div>
+        <div class="work-meta">
+          <div>
+            <h3 class="work-title">Pixel Art</h3>
+            <p class="work-caption">GUIs, icons and illustrations</p>
+          </div>
+          <span class="work-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <a href="work/development.html" class="work-card reveal" aria-label="Development portfolio">
+        <div class="work-thumb">
+          <div class="work-thumb-inner">
+            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="300" fill="#0e0e13"/>
+              <g stroke="#ffffff" stroke-opacity="0.18" stroke-width="1">
+                <path d="M80 80 L200 150"/>
+                <path d="M320 80 L200 150"/>
+                <path d="M80 220 L200 150"/>
+                <path d="M320 220 L200 150"/>
+                <path d="M80 80 L80 220"/>
+                <path d="M320 80 L320 220"/>
+              </g>
+              <g fill="#ff2a3d">
+                <rect x="72" y="72" width="16" height="16"/>
+                <rect x="312" y="72" width="16" height="16"/>
+                <rect x="72" y="212" width="16" height="16"/>
+                <rect x="312" y="212" width="16" height="16"/>
+              </g>
+              <g fill="#0a0a0c">
+                <rect x="76" y="76" width="8" height="8"/>
+                <rect x="316" y="76" width="8" height="8"/>
+                <rect x="76" y="216" width="8" height="8"/>
+                <rect x="316" y="216" width="8" height="8"/>
+              </g>
+              <rect x="184" y="134" width="32" height="32" fill="#ff2a3d"/>
+              <rect x="190" y="140" width="20" height="20" fill="#0a0a0c"/>
+              <rect x="195" y="145" width="10" height="10" fill="#ff2a3d"/>
+            </svg>
+          </div>
+          <div class="work-thumb-overlay"></div>
+          <div class="work-thumb-corner">Development</div>
+        </div>
+        <div class="work-meta">
+          <div>
+            <h3 class="work-title">Development</h3>
+            <p class="work-caption">Bots, pipelines and tooling</p>
+          </div>
+          <span class="work-arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CONTACT ============== -->
+<section class="section" id="contact" data-screen-label="05 Contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <div class="contact-inner">
+        <div class="contact-body">
+          <p class="eyebrow">04 / Contact</p>
+          <h2 class="section-heading reveal-words">Let's build something.</h2>
+          <p>
+            Projects are scoped and clients are hosted in our Discord — it's where
+            briefs become builds. Drop in, share what you're making, and we'll take
+            it from there. Prefer email? That works too.
+          </p>
+        </div>
+
+        <div class="contact-actions">
+          <a href="#" class="discord-cta magnetic" data-magnetic="0.18" aria-label="Join our Discord — primary contact">
+            <span class="left">
+              <span class="icon-box" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.369A19.79 19.79 0 0 0 16.558 3.2a.074.074 0 0 0-.079.037c-.34.604-.719 1.388-.984 2.007a18.27 18.27 0 0 0-5.487 0 12.683 12.683 0 0 0-.997-2.007.077.077 0 0 0-.079-.037A19.79 19.79 0 0 0 5.18 4.369a.07.07 0 0 0-.032.027C2.07 9.045 1.25 13.58 1.65 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.873-1.295 1.225-1.994a.076.076 0 0 0-.042-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.927 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.009c.12.099.245.198.372.292a.077.077 0 0 1-.006.128 12.298 12.298 0 0 1-1.873.891.077.077 0 0 0-.041.107c.36.699.772 1.364 1.225 1.993a.076.076 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.029.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.548-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.956 2.42-2.157 2.42zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.418 2.157-2.418 1.21 0 2.176 1.094 2.157 2.418 0 1.334-.946 2.42-2.157 2.42z"/></svg>
+              </span>
+              <span>
+                <span class="label">Join Our Discord</span><br/>
+                <span class="sub">Primary intake · Real-time</span>
+              </span>
+            </span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+
+          <a href="#" class="email-cta" aria-label="Email us">
+            <span class="left">
+              <span class="label">Email Us</span>
+              <span class="addr">[<span class="__cf_email__" data-cfemail="7d1e1213091c1e093d1213180f1c14190e0908191412531e1210">[email&#160;protected]</span>]</span>
+            </span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18v10H3z"/><path d="M3 7l9 7 9-7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Socials (#18) -->
+      <div class="socials">
+        <p class="socials-label">Find us elsewhere</p>
+        <div class="socials-grid">
+          <a href="#" target="_blank" rel="noopener" class="social-link" aria-label="Twitter / X">
+            <svg class="s-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span class="s-name">Twitter</span>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+            <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <span class="s-name">Instagram</span>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="social-link" aria-label="McModels">
+            <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L21 7 L12 12 L3 7 Z"/><path d="M3 7 L3 17 L12 22 L12 12"/><path d="M21 7 L21 17 L12 22"/></svg>
+            <span class="s-name">McModels</span>
+          </a>
+          <a href="#" target="_blank" rel="noopener" class="social-link" aria-label="BuiltByBit">
+            <svg class="s-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="14" y="14" width="6" height="6" fill="currentColor" stroke="none"/></svg>
+            <span class="s-name">BuiltByBit</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-text">ONE RAID <em>/ STUDIO</em></span>
+        </a>
+        <p class="footer-tagline">One Complete Solution.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">Discord ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Twitter ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Instagram ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">McModels ↗</a></li>
+          <li><a href="#" target="_blank" rel="noopener">BuiltByBit ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© One Raid Studio 2026</span>
+      <span class="cubes" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <span>Built block by block</span>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+</body>
+</html>
