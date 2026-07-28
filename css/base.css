@@ -588,7 +588,12 @@ body.is-locked{overflow:hidden}
 
 /* phone */
 @media (max-width:640px){
-  :root{--crt-grain:.035;--crt-line:rgba(255,243,246,.026)}
+  :root{
+    --crt-grain:.035;--crt-line:rgba(255,243,246,.026);
+    /* the desktop clamp floors at 20px on any phone, which reads far too
+       small for the hero lockup — roughly +50% at 390px */
+    --fs-display:clamp(1.7rem,7.7vw,1.9rem);
+  }
   .grid{grid-template-columns:1fr}
   .ghostword{display:none}
   .footer__grid{grid-template-columns:1fr;gap:var(--sp-5)}
