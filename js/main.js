@@ -17,13 +17,31 @@
   (function () {
     var boot = document.querySelector('.boot');
     if (!boot) return;
-    var MIN = 550, MAX = 4000, opened = Date.now(), settled = false;
-    var pageDone = document.readyState === 'complete';
-    var fontsDone = !(document.fonts && document.fonts.ready);
+    var fill = boot.querySelector('.boot__bar i');
+    var label = boot.querySelector('.boot__label');
+    var MIN = 200, MAX = 10000, opened = Date.now(), settled = false;
+
+    // Count what the browser is actually fetching for first paint: the eager
+    // images, the web fonts, and the load event itself. Lazy images are left
+    // out on purpose — they don't fetch until you scroll, so waiting on them
+    // would stall the bar forever.
+    var imgs = Array.prototype.filter.call(document.images, function (img) {
+      return img.getAttribute('loading') !== 'lazy';
+    });
+    var sheets = document.styleSheets.length;   // render-blocking: already in
+    var total = imgs.length + sheets + 2;       // + web fonts + the load event
+    var loaded = sheets;
+
+    function paint() {
+      var pct = Math.min(100, Math.round(loaded / total * 100));
+      if (fill) fill.style.width = pct + '%';
+      if (label) label.textContent = 'Loading ' + pct + '%';
+    }
 
     function dismiss() {
       if (settled) return;
       settled = true;
+      loaded = total; paint();
       setTimeout(function () {
         boot.classList.add('is-done');
         setTimeout(function () {
@@ -31,14 +49,29 @@
         }, 700);
       }, Math.max(0, MIN - (Date.now() - opened)));
     }
-    function maybe() { if (pageDone && fontsDone) dismiss(); }
 
-    if (!pageDone) window.addEventListener('load', function () { pageDone = true; maybe(); });
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { fontsDone = true; maybe(); });
+    function step() {
+      loaded++;
+      paint();
+      if (loaded >= total) dismiss();
     }
-    setTimeout(dismiss, MAX);
-    maybe();
+
+    paint();
+    for (var i = 0; i < imgs.length; i++) {
+      (function (img) {
+        if (img.complete) { step(); return; }
+        var fired = false;
+        var once = function () { if (fired) return; fired = true; step(); };
+        img.addEventListener('load', once);
+        img.addEventListener('error', once);
+      })(imgs[i]);
+    }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(step);
+    else step();
+    if (document.readyState === 'complete') step();
+    else window.addEventListener('load', step);
+
+    setTimeout(dismiss, MAX);   // hard ceiling if an asset never resolves
   })();
 
   /* ------------------------------------------------------ motion modes
@@ -85,6 +118,8 @@
 
   function setMotion(mode, persist) {
     body.setAttribute('data-motion', mode);
+    // Kill any easing pass before the scroll-behavior below changes under it.
+    stopSmooth();
     // 'auto' when the JS easing engine drives anchors, native smooth otherwise.
     root.style.scrollBehavior =
       (mode === 'max' && finePointer && !prefersReduced) ? 'auto'
@@ -256,11 +291,24 @@
   function maxScroll() {
     return Math.max(0, root.scrollHeight - window.innerHeight);
   }
+  // (1) Always scroll instantly, whatever scroll-behavior says, so the lerp
+  //     can never be re-smoothed by CSS underneath itself.
+  function sJump(y) {
+    try { window.scrollTo({ top: y, left: window.scrollX, behavior: 'instant' }); }
+    catch (err) { window.scrollTo(0, y); }
+  }
+  // (2) Bail the moment the engine is switched off, and resync the target.
+  function stopSmooth() {
+    if (sRaf) cancelAnimationFrame(sRaf);
+    sRaf = null;
+    sTarget = window.scrollY;
+  }
   function sStep() {
+    if (!smoothOn()) { stopSmooth(); return; }
     var cur = window.scrollY;
     var delta = sTarget - cur;
-    if (Math.abs(delta) < 0.5) { window.scrollTo(0, sTarget); sRaf = null; return; }
-    window.scrollTo(0, cur + delta * EASE_AMOUNT);
+    if (Math.abs(delta) < 0.5) { sJump(sTarget); sRaf = null; return; }
+    sJump(cur + delta * EASE_AMOUNT);
     sRaf = requestAnimationFrame(sStep);
   }
   function scrollToY(y) {

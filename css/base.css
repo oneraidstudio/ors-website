@@ -227,15 +227,14 @@ html{scrollbar-color:var(--brand-red-lit) var(--surface);scrollbar-width:auto}
 .boot__bar i{
   display:block;height:100%;width:0;
   background:var(--brand-red-lit);box-shadow:0 0 16px var(--glow-red);
-  animation:bootFill 1.7s cubic-bezier(.3,.9,.4,1) forwards;
+  transition:width .28s var(--ease);
 }
 /* LED segments */
 .boot__bar::after{
   content:"";position:absolute;inset:0;pointer-events:none;
   background:repeating-linear-gradient(90deg,transparent 0 9px,var(--bg) 9px 12px);
 }
-.boot.is-done .boot__bar i{width:100%;animation:none;transition:width .25s linear}
-@keyframes bootFill{0%{width:0}55%{width:62%}100%{width:92%}}
+.boot.is-done .boot__bar i{width:100%}
 .boot__label{
   font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.2em;
   text-transform:uppercase;color:var(--text-dim);
@@ -270,7 +269,6 @@ html{scrollbar-color:var(--brand-red-lit) var(--surface);scrollbar-width:auto}
   font-family:var(--arcade);font-weight:400;font-size:1rem;letter-spacing:.1em;
   color:transparent;-webkit-text-fill-color:transparent;
   -webkit-text-stroke:1px var(--neon-red);
-  text-shadow:0 0 20px var(--glow-red);
   white-space:nowrap;
 }
 
@@ -504,8 +502,8 @@ body.is-locked{overflow:hidden}
 .footer__brand{display:flex;flex-direction:column;gap:10px}
 .footer__word{
   font-family:var(--pixel);font-weight:700;font-size:1.25rem;
-  background-image:var(--chrome);-webkit-background-clip:text;background-clip:text;
-  color:transparent;-webkit-text-fill-color:transparent;text-shadow:2px 2px 0 var(--maroon);
+  color:var(--neon-cyan);
+  text-shadow:2px 2px 0 var(--teal-deep),0 0 20px var(--glow-cyan);
 }
 .footer__tag{font-family:var(--bitmap);font-size:.95rem;line-height:1.5;color:var(--text-muted)}
 .footer__col{display:flex;flex-direction:column;gap:var(--sp-2);min-width:0}
@@ -593,7 +591,12 @@ body.is-locked{overflow:hidden}
   :root{--crt-grain:.035;--crt-line:rgba(255,243,246,.026)}
   .grid{grid-template-columns:1fr}
   .ghostword{display:none}
-  .footer__grid{grid-template-columns:1fr;gap:var(--sp-6)}
+  .footer__grid{grid-template-columns:1fr;gap:var(--sp-5)}
+  /* the link lists flow inline and wrap — one 44px row per link made the
+     footer taller than the viewport */
+  nav.footer__col{flex-flow:row wrap;align-items:center;gap:0 var(--sp-4)}
+  nav.footer__col .footer__label{flex:1 0 100%;margin-bottom:2px}
+  .footer__link{min-width:44px}
   .footer__bar{flex-direction:column;gap:var(--sp-2)}
   .switch{width:100%}
   .switch button{flex:1;padding-inline:6px}

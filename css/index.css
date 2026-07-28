@@ -167,6 +167,11 @@
 }
 
 @media (max-width:640px){
+  /* the tube glow reads far heavier on a small, dense screen — dial it back */
+  .wordmark .fill{text-shadow:0 0 10px rgba(255,46,77,.4)}
+  .wordmark .slash{text-shadow:0 0 8px rgba(0,229,255,.5)}
+  .tagline{text-shadow:0 0 14px rgba(255,46,77,.28)}
+  .hero__lede{display:none}
   .hero__cta{gap:var(--sp-3);width:100%}
   .hero__cta .btn{flex:1 1 100%}
   .socials li{flex:1 1 140px}
