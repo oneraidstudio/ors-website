@@ -1,282 +1,389 @@
-/* ============================================================
-   One Raid Studio — interactions & animations
-   ============================================================ */
+/* ===========================================================================
+   ONE RAID STUDIO — main.js
+   Shared behaviour: motion modes, sticky header, reveal, drawer, copy-email.
+   No dependencies. Runs at the end of <body>.
+   =========================================================================== */
 (function () {
   'use strict';
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- intro: assemble from cubes, then reveal hero ---------- */
-  (function intro() {
-    var intro = document.getElementById('intro');
-    if (!intro || reduceMotion) {
-      document.body.classList.remove('intro-lock');
-      document.body.classList.add('ready');
-      return;
+  var body = document.body;
+  var root = document.documentElement;
+
+  /* ------------------------------------------------------- boot screen
+     Held for a short minimum so it can't flash on a warm cache, then
+     dismissed once the page and the web fonts are in. Hard-capped at 4s
+     so a stalled asset never keeps it up; base.css also carries an 8s
+     CSS failsafe for the case where this script never runs at all.     */
+  (function () {
+    var boot = document.querySelector('.boot');
+    if (!boot) return;
+    var MIN = 550, MAX = 4000, opened = Date.now(), settled = false;
+    var pageDone = document.readyState === 'complete';
+    var fontsDone = !(document.fonts && document.fonts.ready);
+
+    function dismiss() {
+      if (settled) return;
+      settled = true;
+      setTimeout(function () {
+        boot.classList.add('is-done');
+        setTimeout(function () {
+          if (boot.parentNode) boot.parentNode.removeChild(boot);
+        }, 700);
+      }, Math.max(0, MIN - (Date.now() - opened)));
     }
-    document.body.classList.add('intro-lock');
-    window.setTimeout(function () {
-      intro.classList.add('done');
-      document.body.classList.remove('intro-lock');
-      document.body.classList.add('ready');
-    }, 1250);
-    intro.addEventListener('transitionend', function () {
-      if (intro.parentNode) intro.parentNode.removeChild(intro);
-    });
+    function maybe() { if (pageDone && fontsDone) dismiss(); }
+
+    if (!pageDone) window.addEventListener('load', function () { pageDone = true; maybe(); });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { fontsDone = true; maybe(); });
+    }
+    setTimeout(dismiss, MAX);
+    maybe();
   })();
 
-  /* ---------- cube particle network (hero canvas) ---------- */
-  (function particles() {
-    var canvas = document.getElementById('heroCanvas');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var DPR = Math.min(2, window.devicePixelRatio || 1);
-    var W = 0, H = 0, particles = [], rafId = 0;
-    var mouse = { x: -9999, y: -9999, active: false };
+  /* ------------------------------------------------------ motion modes
+     max    — everything, including ambient loops
+     subtle — no ambient loops; hover + reveal transitions stay
+     zero   — nothing moves                                              */
+  var io = null;
 
-    function targetCount() {
-      var a = Math.min(window.innerWidth, 1600) * Math.min(window.innerHeight, 1000);
-      var c = Math.round(60 + (a / (1600 * 1000)) * 40);
-      return Math.max(36, Math.min(100, window.innerWidth < 640 ? 46 : c));
-    }
-    function resize() {
-      DPR = Math.min(2, window.devicePixelRatio || 1);
-      var rect = canvas.getBoundingClientRect();
-      W = rect.width; H = rect.height;
-      canvas.width = Math.floor(W * DPR);
-      canvas.height = Math.floor(H * DPR);
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      seed(targetCount());
-    }
-    function seed(n) {
-      particles = [];
-      for (var i = 0; i < n; i++) {
-        particles.push({
-          x: Math.random() * W, y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
-          s: 2 + Math.random() * 3.5,
-          rot: Math.random() * Math.PI, rs: (Math.random() - 0.5) * 0.003,
-          depth: 0.4 + Math.random() * 0.6
-        });
-      }
-    }
-    function step() {
-      ctx.clearRect(0, 0, W, H);
-      var i, j, p, a, b, dx, dy, d2;
-      for (i = 0; i < particles.length; i++) {
-        p = particles[i];
-        p.x += p.vx; p.y += p.vy; p.rot += p.rs;
-        if (p.x < -10) p.x = W + 10;
-        if (p.x > W + 10) p.x = -10;
-        if (p.y < -10) p.y = H + 10;
-        if (p.y > H + 10) p.y = -10;
-        if (mouse.active) {
-          dx = mouse.x - p.x; dy = mouse.y - p.y; d2 = dx * dx + dy * dy;
-          if (d2 < 180 * 180) {
-            var d = Math.sqrt(d2) || 1;
-            var force = (1 - d / 180) * 0.06;
-            p.vx += (dx / d) * force; p.vy += (dy / d) * force;
-          }
-        }
-        p.vx *= 0.985; p.vy *= 0.985;
-        if (Math.abs(p.vx) < 0.04) p.vx += (Math.random() - 0.5) * 0.01;
-        if (Math.abs(p.vy) < 0.04) p.vy += (Math.random() - 0.5) * 0.01;
-      }
-      var MAX = 130, MAX2 = MAX * MAX;
-      for (i = 0; i < particles.length; i++) {
-        a = particles[i];
-        for (j = i + 1; j < particles.length; j++) {
-          b = particles[j];
-          dx = a.x - b.x; dy = a.y - b.y; d2 = dx * dx + dy * dy;
-          if (d2 < MAX2) {
-            var dd = Math.sqrt(d2);
-            var alpha = (1 - dd / MAX) * 0.22;
-            var red = 0;
-            if (mouse.active) {
-              var mx = (a.x + b.x) * 0.5 - mouse.x, my = (a.y + b.y) * 0.5 - mouse.y;
-              var md2 = mx * mx + my * my;
-              if (md2 < 160 * 160) red = 1 - Math.sqrt(md2) / 160;
-            }
-            ctx.beginPath();
-            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-            ctx.lineWidth = 0.7;
-            ctx.strokeStyle = red > 0
-              ? 'rgba(255, 42, 61, ' + (alpha + red * 0.45) + ')'
-              : 'rgba(255, 255, 255, ' + alpha + ')';
-            ctx.stroke();
-          }
-        }
-      }
-      for (i = 0; i < particles.length; i++) {
-        p = particles[i];
-        var near = mouse.active ? Math.hypot(p.x - mouse.x, p.y - mouse.y) : 9999;
-        var hot = near < 140 ? (1 - near / 140) : 0;
-        ctx.save();
-        ctx.translate(p.x, p.y); ctx.rotate(p.rot);
-        var s = p.s, baseAlpha = 0.35 + 0.4 * p.depth;
-        if (hot > 0.05) {
-          var grd = ctx.createRadialGradient(0, 0, 0, 0, 0, s * 6);
-          grd.addColorStop(0, 'rgba(255, 42, 61, ' + (0.35 * hot) + ')');
-          grd.addColorStop(1, 'rgba(255, 42, 61, 0)');
-          ctx.fillStyle = grd;
-          ctx.fillRect(-s * 6, -s * 6, s * 12, s * 12);
-        }
-        ctx.fillStyle = hot > 0.4 ? 'rgba(255, 42, 61, ' + (0.85 * hot + 0.15) + ')'
-                                  : 'rgba(220, 220, 230, ' + baseAlpha + ')';
-        ctx.fillRect(-s, -s, s * 2, s * 2);
-        ctx.fillStyle = 'rgba(255,255,255, ' + (0.15 + 0.2 * p.depth) + ')';
-        ctx.fillRect(-s, -s, s * 2, 1);
-        ctx.strokeStyle = 'rgba(0, 0, 0, 0.35)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(-s, -s, s * 2, s * 2);
-        ctx.restore();
-      }
-      rafId = requestAnimationFrame(step);
-    }
-    function onPointer(e) {
-      var rect = canvas.getBoundingClientRect();
-      var t = e.touches ? e.touches[0] : e;
-      mouse.x = t.clientX - rect.left; mouse.y = t.clientY - rect.top;
-      mouse.active = true;
-    }
-    function onLeave() { mouse.active = false; mouse.x = -9999; mouse.y = -9999; }
+  function motion() {
+    return body.getAttribute('data-motion') || 'max';
+  }
 
-    window.addEventListener('resize', function () {
-      cancelAnimationFrame(rafId); resize(); rafId = requestAnimationFrame(step);
-    });
-    canvas.addEventListener('mousemove', onPointer);
-    canvas.addEventListener('mouseleave', onLeave);
-    canvas.addEventListener('touchmove', onPointer, { passive: true });
-    canvas.addEventListener('touchend', onLeave);
-    resize();
-    rafId = requestAnimationFrame(step);
-  })();
+  function armReveal() {
+    if (io) { io.disconnect(); io = null; }
 
-  /* ---------- nav scroll state + mobile menu ---------- */
-  (function nav() {
-    var navWrap = document.getElementById('navWrap');
-    function onScroll() {
-      if (window.scrollY > 12) navWrap.classList.add('is-scrolled');
-      else navWrap.classList.remove('is-scrolled');
-    }
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-
-    var btn = document.getElementById('menuBtn');
-    var menu = document.getElementById('mobileMenu');
-    if (btn && menu) {
-      btn.addEventListener('click', function () {
-        var open = menu.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-      menu.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          menu.classList.remove('open');
-          btn.setAttribute('aria-expanded', 'false');
-        });
-      });
-    }
-  })();
-
-  /* ---------- scroll progress bar ---------- */
-  (function progress() {
-    var bar = document.getElementById('scrollProgress');
-    if (!bar) return;
-    function update() {
-      var h = document.documentElement;
-      var max = h.scrollHeight - h.clientHeight;
-      var p = max > 0 ? h.scrollTop / max : 0;
-      bar.style.transform = 'scaleX(' + p + ')';
-    }
-    document.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
-    update();
-  })();
-
-  /* ---------- generic reveal-on-scroll ---------- */
-  (function reveal() {
     var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window) || reduceMotion) {
-      els.forEach(function (el) { el.classList.add('in'); });
+    var i;
+
+    if (motion() === 'zero' || !('IntersectionObserver' in window)) {
+      for (i = 0; i < els.length; i++) els[i].classList.add('is-in');
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    els.forEach(function (el) { io.observe(el); });
-  })();
 
-  /* ---------- word-by-word heading reveal ---------- */
-  (function words() {
-    var heads = document.querySelectorAll('.reveal-words');
-    heads.forEach(function (h) {
-      if (h.dataset.split === '1') return;
-      h.dataset.split = '1';
-      var parts = h.textContent.trim().split(/\s+/);
-      h.textContent = '';
-      parts.forEach(function (w, i) {
-        var span = document.createElement('span');
-        span.className = 'word';
-        span.style.setProperty('--i', i);
-        span.textContent = w;
-        h.appendChild(span);
-        if (i < parts.length - 1) h.appendChild(document.createTextNode(' '));
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
       });
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    // Only arm what is still below the fold; anything already on screen
+    // stays visible so a slow observer can never hide first paint.
+    var fold = window.innerHeight * 0.9;
+    for (i = 0; i < els.length; i++) {
+      if (els[i].getBoundingClientRect().top > fold) {
+        els[i].classList.add('is-armed');
+        io.observe(els[i]);
+      } else {
+        els[i].classList.add('is-in');
+      }
+    }
+  }
+
+  function setMotion(mode, persist) {
+    body.setAttribute('data-motion', mode);
+    // 'auto' when the JS easing engine drives anchors, native smooth otherwise.
+    root.style.scrollBehavior =
+      (mode === 'max' && finePointer && !prefersReduced) ? 'auto'
+      : mode === 'zero' ? 'auto' : 'smooth';
+
+    if (persist) {
+      try { localStorage.setItem('ors-motion', mode); } catch (e) {}
+    }
+
+    var btns = document.querySelectorAll('[data-motion-btn]');
+    for (var i = 0; i < btns.length; i++) {
+      var on = btns[i].getAttribute('data-motion-btn') === mode;
+      btns[i].classList.toggle('is-on', on);
+      btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+
+    if (mode !== 'max' && cube) cube.style.transform = '';
+    armReveal();
+  }
+
+  var cube = document.querySelector('[data-parallax]');
+  var saved = null;
+  try { saved = localStorage.getItem('ors-motion'); } catch (e) {}
+  var prefersReduced = window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia &&
+    window.matchMedia('(pointer: fine)').matches;
+
+  setMotion(saved || (prefersReduced ? 'zero' : 'max'), false);
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('[data-motion-btn]');
+    if (btn) setMotion(btn.getAttribute('data-motion-btn'), true);
+  });
+
+  /* --------------------------------------------------- sticky header
+     A sentinel + IntersectionObserver beats a scroll listener: no work
+     happens on the main thread between the two state changes.          */
+  var hdr = document.querySelector('.hdr');
+  if (hdr) {
+    if ('IntersectionObserver' in window) {
+      var sentinel = document.createElement('div');
+      sentinel.setAttribute('aria-hidden', 'true');
+      sentinel.style.cssText = 'position:absolute;top:0;left:0;width:1px;height:24px;pointer-events:none';
+      body.insertBefore(sentinel, body.firstChild);
+      new IntersectionObserver(function (entries) {
+        hdr.classList.toggle('is-scrolled', !entries[0].isIntersecting);
+      }).observe(sentinel);
+    } else {
+      window.addEventListener('scroll', function () {
+        hdr.classList.toggle('is-scrolled', window.scrollY > 24);
+      }, { passive: true });
+    }
+  }
+
+  /* ------------------------------------------------------ hero parallax
+     Pointer-driven, rAF-batched, and skipped entirely on touch devices
+     where there is no cursor to follow.                                 */
+  if (cube && finePointer) {
+    var pending = false;
+    var px = 0;
+    var py = 0;
+
+    window.addEventListener('mousemove', function (e) {
+      if (motion() !== 'max') return;
+      px = e.clientX / window.innerWidth - 0.5;
+      py = e.clientY / window.innerHeight - 0.5;
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        cube.style.transform =
+          'translate3d(' + (px * 20).toFixed(1) + 'px,' + (py * 14).toFixed(1) + 'px,0)' +
+          ' rotateX(' + (-py * 5).toFixed(1) + 'deg) rotateY(' + (px * 7).toFixed(1) + 'deg)';
+      });
+    }, { passive: true });
+  }
+
+  /* ------------------------------------------------------------ drawer */
+  var drawer = document.querySelector('.drawer');
+  var burger = document.querySelector('.burger');
+  var shell = [
+    document.querySelector('.hdr'),
+    document.querySelector('#main'),
+    document.querySelector('.footer')
+  ];
+  var lastFocus = null;
+
+  function focusable() {
+    if (!drawer) return [];
+    return Array.prototype.filter.call(
+      drawer.querySelectorAll('a[href], button:not([disabled])'),
+      function (el) { return el.offsetParent !== null; }
+    );
+  }
+
+  function setShellInert(on) {
+    shell.forEach(function (el) {
+      if (!el) return;
+      if (on) { el.setAttribute('inert', ''); el.setAttribute('aria-hidden', 'true'); }
+      else { el.removeAttribute('inert'); el.removeAttribute('aria-hidden'); }
     });
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      heads.forEach(function (h) { h.classList.add('in'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.4 });
-    heads.forEach(function (h) { io.observe(h); });
-  })();
+  }
 
-  /* ---------- subtle parallax on decorative elements ---------- */
-  (function parallax() {
-    if (reduceMotion) return;
-    var els = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-    if (!els.length) return;
-    var ticking = false;
-    function apply() {
-      var vh = window.innerHeight;
-      els.forEach(function (el) {
-        var speed = parseFloat(el.getAttribute('data-parallax')) || 0.1;
-        var rect = el.getBoundingClientRect();
-        var center = rect.top + rect.height / 2;
-        var offset = (center - vh / 2) * speed;
-        el.style.transform = 'translate3d(0,' + (-offset).toFixed(2) + 'px,0)';
-      });
-      ticking = false;
-    }
-    function onScroll() {
-      if (!ticking) { ticking = true; requestAnimationFrame(apply); }
-    }
-    document.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', apply);
-    apply();
-  })();
+  function openDrawer() {
+    if (!drawer) return;
+    lastFocus = document.activeElement;
+    drawer.classList.add('is-open');
+    body.classList.add('is-locked');
+    if (burger) burger.setAttribute('aria-expanded', 'true');
+    setShellInert(true);
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
 
-  /* ---------- magnetic cursor pull on buttons ---------- */
-  (function magnetic() {
-    if (reduceMotion) return;
-    if (window.matchMedia('(hover: none)').matches) return; // skip touch
-    var els = document.querySelectorAll('.magnetic');
-    els.forEach(function (el) {
-      var strength = parseFloat(el.getAttribute('data-magnetic')) || 0.35;
-      el.addEventListener('mousemove', function (e) {
-        var r = el.getBoundingClientRect();
-        var mx = e.clientX - (r.left + r.width / 2);
-        var my = e.clientY - (r.top + r.height / 2);
-        el.style.transform = 'translate(' + (mx * strength).toFixed(2) + 'px,' + (my * strength).toFixed(2) + 'px)';
-      });
-      el.addEventListener('mouseleave', function () {
-        el.style.transform = '';
-      });
+  function closeDrawer() {
+    if (!drawer || !drawer.classList.contains('is-open')) return;
+    drawer.classList.remove('is-open');
+    body.classList.remove('is-locked');
+    if (burger) burger.setAttribute('aria-expanded', 'false');
+    setShellInert(false);
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+    lastFocus = null;
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t.closest) return;
+    if (t.closest('.burger')) { openDrawer(); return; }
+    if (t.closest('[data-drawer-close]') || t.closest('.drawer__link')) closeDrawer();
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!drawer || !drawer.classList.contains('is-open')) return;
+
+    if (e.key === 'Escape') { closeDrawer(); return; }
+
+    // Trap Tab inside the open drawer.
+    if (e.key !== 'Tab') return;
+    var items = focusable();
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+
+  // Close the drawer if the viewport grows past the breakpoint while open.
+  if (window.matchMedia) {
+    var wide = window.matchMedia('(min-width: 961px)');
+    var onWide = function (e) { if (e.matches) closeDrawer(); };
+    if (wide.addEventListener) wide.addEventListener('change', onWide);
+    else if (wide.addListener) wide.addListener(onWide);
+  }
+
+  /* --------------------------------------------------- smooth scrolling
+     Eased wheel scrolling, only where it belongs: a real pointer, Max
+     motion, and nothing modal open. Touch is never hijacked — the OS
+     already does momentum there and overriding it feels wrong. When the
+     engine is off, CSS scroll-behavior handles anchors natively.        */
+  var sTarget = window.scrollY;
+  var sRaf = null;
+  var EASE_AMOUNT = 0.18;
+
+  function smoothOn() {
+    return motion() === 'max' && finePointer && !prefersReduced &&
+           !body.classList.contains('is-locked');
+  }
+  function maxScroll() {
+    return Math.max(0, root.scrollHeight - window.innerHeight);
+  }
+  function sStep() {
+    var cur = window.scrollY;
+    var delta = sTarget - cur;
+    if (Math.abs(delta) < 0.5) { window.scrollTo(0, sTarget); sRaf = null; return; }
+    window.scrollTo(0, cur + delta * EASE_AMOUNT);
+    sRaf = requestAnimationFrame(sStep);
+  }
+  function scrollToY(y) {
+    sTarget = Math.max(0, Math.min(y, maxScroll()));
+    if (!sRaf) sRaf = requestAnimationFrame(sStep);
+  }
+
+  window.addEventListener('wheel', function (e) {
+    if (!smoothOn() || e.ctrlKey) return;
+    // Let modals and any other scroll container handle their own wheel.
+    if (e.target.closest && e.target.closest('.drawer, .lightbox')) return;
+    e.preventDefault();
+    var step = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+    scrollToY(sTarget + step);
+  }, { passive: false });
+
+  // Keep the target honest when something else scrolls: keyboard, scrollbar
+  // drag, browser restore.
+  window.addEventListener('scroll', function () {
+    if (!sRaf) sTarget = window.scrollY;
+  }, { passive: true });
+
+  // Anchors go through the same engine so there is only ever one scroller.
+  document.addEventListener('click', function (e) {
+    if (!smoothOn()) return;
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.hasAttribute('data-pending')) return;
+    var id = a.getAttribute('href').slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    var offset = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    scrollToY(el.getBoundingClientRect().top + window.scrollY - offset);
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+    // Move focus so keyboard and screen-reader users land where the page did.
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  });
+
+  /* ---------------------------------------------------------- marquee
+     The strip has to be at least twice the viewport wide or the -50%
+     translate lands on empty space and snaps — which is what the reset
+     was. Clone the sequence until it covers any screen, then derive the
+     duration from the measured width so the speed is identical whether
+     you're on a phone or an ultrawide.                                  */
+  var track = document.querySelector('[data-marquee]');
+  if (track && track.firstElementChild) {
+    var seq = track.firstElementChild;
+    var SEC_PER_SEQ = 18; // one sequence-width of travel per 18s of runtime
+
+    var fitMarquee = function () {
+      // Natural text width is fractional. Left alone, every copy lands on a
+      // sub-pixel boundary and the -50% wrap resamples slightly differently
+      // from the start frame — a faint shimmer at the loop point. Pinning the
+      // sequence to a whole pixel makes the wrap frame bit-identical.
+      seq.style.width = '';
+      var w = Math.ceil(seq.getBoundingClientRect().width);
+      if (!w) return;
+      seq.style.width = w + 'px';
+
+      // -50% travels half the track, so the copy count must be even.
+      var need = Math.ceil((window.innerWidth * 2) / w);
+      if (need % 2) need++;
+      if (need < 2) need = 2;
+
+      while (track.children.length > 1) track.removeChild(track.lastElementChild);
+      for (var n = 1; n < need; n++) track.appendChild(seq.cloneNode(true));
+      track.style.animationDuration = (SEC_PER_SEQ * need) + 's';
+    };
+
+    fitMarquee();
+    // Web fonts change the measured width, so re-fit once they land.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMarquee);
+    var mqT;
+    window.addEventListener('resize', function () {
+      clearTimeout(mqT);
+      mqT = setTimeout(fitMarquee, 200);
+    }, { passive: true });
+  }
+
+  /* Shared with portfolio.js so the lightbox locks the page the same way
+     the drawer does, instead of reimplementing it. */
+  window.ORS = window.ORS || {};
+  window.ORS.lockShell = function (on) {
+    setShellInert(on);
+    body.classList.toggle('is-locked', on);
+  };
+
+  /* -------------------------------------------------------- copy email */
+  var copyBtn = document.querySelector('[data-copy-email]');
+  var status = document.querySelector('[data-copy-status]');
+
+  function announce(msg) {
+    if (!status) return;
+    status.textContent = msg;
+    clearTimeout(announce._t);
+    announce._t = setTimeout(function () { status.textContent = ''; }, 2600);
+  }
+
+  if (copyBtn) {
+    copyBtn.addEventListener('click', function () {
+      var email = copyBtn.getAttribute('data-copy-email');
+      var done = function () { announce('Copied ' + email); };
+      var failed = function () { announce('Copy failed — the address is ' + email); };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(done, failed);
+        return;
+      }
+      // Fallback for non-secure contexts, where the Clipboard API is absent.
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;top:-1000px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy') ? done() : failed();
+        document.body.removeChild(ta);
+      } catch (err) {
+        failed();
+      }
     });
-  })();
+  }
 })();

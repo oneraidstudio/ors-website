@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Portfolio — One Raid Studio</title>
+  <meta name="description" content="Selected models, pixel art, and tooling shipped by One Raid Studio.">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0B0410">
+  <link rel="canonical" href="https://oneraidstudio.com/portfolio.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://oneraidstudio.com/portfolio.html">
+  <meta property="og:title" content="Portfolio — One Raid Studio">
+  <meta property="og:description" content="Selected models, pixel art, and tooling shipped by One Raid Studio.">
+  <meta property="og:image" content="https://oneraidstudio.com/assets/ors_1024x1024.png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/ors_16x16.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/ors_64x64.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="assets/ors_128x128.png">
+  <link rel="apple-touch-icon" href="assets/ors_128x128.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pirata+One&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/portfolio.css">
+  <script>
+    /* A missing image collapses to its labelled placeholder instead of a
+       broken-image icon, so the layout holds and gaps are self-documenting. */
+    addEventListener('error', function (e) {
+      var t = e.target;
+      if (!t || t.tagName !== 'IMG' || !t.hasAttribute('data-slot')) return;
+      var frame = t.closest('[data-label]');
+      if (frame) frame.setAttribute('data-empty', '');
+      t.style.display = 'none';
+    }, true);
+  </script>
+  <noscript><style>.boot{display:none!important}</style></noscript>
+</head>
+<body data-motion="max">
+  <div class="boot" aria-hidden="true">
+    <div class="boot__inner">
+      <img class="boot__mark" src="assets/ors_128x128.png" alt="" width="64" height="64">
+      <span class="boot__word" translate="no">O.R.S</span>
+      <div class="boot__bar"><i></i></div>
+      <span class="boot__label">Loading&#8230;</span>
+    </div>
+  </div>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="crt" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="hdr">
+    <div class="wrap hdr__inner">
+      <a class="brand" href="index.html" aria-label="One Raid Studio — home">
+        <img src="assets/ors_64x64.png" alt="" width="32" height="32">
+        <span class="brand__word" translate="no">O.R.S</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a class="nav__link" href="index.html">Home</a>
+        <a class="nav__link" href="products.html">Products</a>
+        <a class="nav__link" href="services.html">Services</a>
+        <a class="nav__link" href="portfolio.html" aria-current="page">Portfolio</a>
+        <a class="btn btn--primary btn--sm" href="#" data-link="discord">Join Discord</a>
+      </nav>
+      <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__head">
+      <span class="brand__word" translate="no">O.R.S</span>
+      <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">&#10005;</button>
+    </div>
+    <nav class="drawer__nav" aria-label="Mobile">
+      <a class="drawer__link" href="index.html">Home</a>
+      <a class="drawer__link" href="products.html">Products</a>
+      <a class="drawer__link" href="services.html">Services</a>
+      <a class="drawer__link" href="portfolio.html" aria-current="page">Portfolio</a>
+    </nav>
+    <a class="btn btn--primary drawer__cta" href="#" data-link="discord">Join Discord</a>
+  </div>
+
+  <main id="main">
+
+    <section class="page-head">
+      <div class="wrap page-head__inner">
+        <div class="sec-head__row">
+          <span class="eyebrow">Selected work</span>
+          <span class="script" aria-hidden="true" style="--tilt:-8deg">Loot</span>
+        </div>
+        <h1 class="h1 tone-ice">Built block by block</h1>
+        <p class="lede">A cross-section of models, pixel art, and tooling shipped for servers.</p>
+      </div>
+    </section>
+
+    <section class="gallery-wrap">
+      <div class="wrap">
+        <div class="filters" role="group" aria-label="Filter work by type">
+          <button class="filter is-on" type="button" data-filter="all" aria-pressed="true" aria-controls="gallery">All work</button>
+          <button class="filter" type="button" data-filter="models" aria-pressed="false" aria-controls="gallery">Models</button>
+          <button class="filter" type="button" data-filter="pixel" aria-pressed="false" aria-controls="gallery">Pixel art</button>
+          <button class="filter" type="button" data-filter="plugins" aria-pressed="false" aria-controls="gallery">Plugins</button>
+          <p class="filters__count" role="status" aria-live="polite" data-filter-count></p>
+        </div>
+
+        <!-- Card sizes: add data-span="COLUMNSxROWS" to any figure below.
+             1x1 (default, square) · 2x1 wide · 1x2 tall · 2x2 big · up to 3
+             on either axis. Spans clamp down on their own on smaller screens. -->
+        <div class="gallery" id="gallery" data-filter="all">
+          <figure class="shot" data-cat="models" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Weapon set &middot; not added yet"
+                    data-title="Weapon set"
+                    data-desc="A matched set of swords, axes and bows modelled in Blockbench for a PvP network. Every piece shares one 32×32 texture atlas so the whole set ships as a single resource pack with no extra draw calls.">
+              <img data-slot src="assets/portfolio/weapon-set.png" alt="Weapon set — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Weapon set</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel">
+            <button class="shot__btn frame" type="button"
+                    data-label="GUI &amp; HUD &middot; not added yet"
+                    data-title="GUI &amp; HUD"
+                    data-desc="Full interface pass for a survival server: chest menus, shop screens, quest log and an in-world HUD. Drawn at native resolution so nothing is ever scaled at runtime.">
+              <img data-slot src="assets/portfolio/gui-hud.png" alt="GUI &amp; HUD — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>GUI &amp; HUD</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models">
+            <button class="shot__btn frame" type="button"
+                    data-label="Mob model &middot; not added yet"
+                    data-title="Mob model"
+                    data-desc="Custom mob with a full walk, idle and attack rig. Built to stay readable at render distance without exceeding the vanilla entity bone budget.">
+              <img data-slot src="assets/portfolio/mob-model.png" alt="Mob model — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Mob model</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="plugins">
+            <button class="shot__btn frame" type="button"
+                    data-label="Server dashboard &middot; not added yet"
+                    data-title="Server dashboard"
+                    data-desc="A web dashboard for staff: live player list, ban and mute queue, and per-world performance graphs. Talks to the server over a small plugin-side API.">
+              <img data-slot src="assets/portfolio/server-dashboard.png" alt="Server dashboard — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Server dashboard</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-span="2x2">
+            <button class="shot__btn frame" type="button"
+                    data-label="Rank icons &middot; not added yet"
+                    data-title="Rank icons"
+                    data-desc="A ladder of rank badges from starter to top tier, designed to read at 16×16 in chat and hold up when blown up on a store page. The colour ramp climbs with the tier so rank order is legible at a glance.">
+              <img data-slot src="assets/portfolio/rank-icons.png" alt="Rank icons — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Rank icons</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models">
+            <button class="shot__btn frame" type="button"
+                    data-label="Furniture pack &middot; not added yet"
+                    data-title="Furniture pack"
+                    data-desc="Low-poly furniture for a roleplay server — seating, lighting, storage and clutter — all sharing one texture sheet and snapping cleanly to the block grid.">
+              <img data-slot src="assets/portfolio/furniture-pack.png" alt="Furniture pack — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Furniture pack</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="plugins">
+            <button class="shot__btn frame" type="button"
+                    data-label="Discord bot &middot; not added yet"
+                    data-title="Discord bot"
+                    data-desc="Links a Discord guild to a Minecraft server: role sync on rank purchase, in-game chat relay, and slash commands for ticket handling.">
+              <img data-slot src="assets/portfolio/discord-bot.png" alt="Discord bot — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Discord bot</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel">
+            <button class="shot__btn frame" type="button"
+                    data-label="Server banner &middot; not added yet"
+                    data-title="Server banner"
+                    data-desc="Marketplace and social banner artwork, delivered at every size the listing pages ask for, from the wide header down to the square thumbnail.">
+              <img data-slot src="assets/portfolio/server-banner.png" alt="Server banner — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Server banner</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models">
+            <button class="shot__btn frame" type="button"
+                    data-label="Cosmetic set &middot; not added yet"
+                    data-title="Cosmetic set"
+                    data-desc="Wearable cosmetics — hats, capes and backpacks — modelled to sit correctly on both the default and slim player skins.">
+              <img data-slot src="assets/portfolio/cosmetic-set.png" alt="Cosmetic set — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Cosmetic set</figcaption>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+
+          <p class="gallery__empty" hidden>Nothing in this category yet — try another filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="wrap band__inner reveal">
+        <span class="eyebrow">There&rsquo;s more where that came from</span>
+        <h2 class="h2 tone-red">Want something like this?</h2>
+        <a class="btn btn--primary btn--lg" href="index.html#contact">Start a project <span class="btn__caret" aria-hidden="true">&#9656;</span></a>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+    <div class="lightbox__backdrop" data-lb-close></div>
+    <div class="lightbox__panel">
+      <button class="lightbox__close" type="button" data-lb-close aria-label="Close">&#10005;</button>
+      <div class="lightbox__media frame" data-label="Image not added yet">
+        <img data-lb-img src="" alt="">
+        <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous piece">&#8249;</button>
+        <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next piece">&#8250;</button>
+      </div>
+      <div class="lightbox__body">
+        <div class="lightbox__meta">
+          <span class="eyebrow" data-lb-cat></span>
+          <span class="lightbox__counter" data-lb-counter></span>
+        </div>
+        <h2 class="h3" id="lb-title" data-lb-title></h2>
+        <p class="lightbox__desc" data-lb-desc></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <span class="footer__word" translate="no">ONE RAID // STUDIO</span>
+        <span class="footer__tag">One Complete Solution.</span>
+      </div>
+      <nav class="footer__col" aria-label="Navigate">
+        <span class="footer__label">Navigate</span>
+        <a class="footer__link" href="index.html">Home</a>
+        <a class="footer__link" href="products.html">Products</a>
+        <a class="footer__link" href="services.html">Services</a>
+        <a class="footer__link" href="portfolio.html">Portfolio</a>
+        <a class="footer__link" href="index.html#contact">Contact</a>
+      </nav>
+      <nav class="footer__col" aria-label="Connect">
+        <span class="footer__label">Connect</span>
+        <a class="footer__link" href="#" data-link="discord">Discord</a>
+        <a class="footer__link" href="#" data-link="x">X</a>
+        <a class="footer__link" href="#" data-link="instagram">Instagram</a>
+        <a class="footer__link" href="#" data-link="mcmodels">MCModels</a>
+        <a class="footer__link" href="#" data-link="builtbybit">BuiltByBit</a>
+        <a class="footer__link" href="#" data-link="sketchfab">Sketchfab</a>
+      </nav>
+      <div class="footer__col" role="group" aria-label="Motion preference">
+        <span class="footer__label">Motion</span>
+        <div class="switch">
+          <button type="button" data-motion-btn="max" aria-pressed="true">Max</button>
+          <button type="button" data-motion-btn="subtle" aria-pressed="false">Subtle</button>
+          <button type="button" data-motion-btn="zero" aria-pressed="false">Zero</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bar">
+      <span class="footer__fine">&copy; One Raid Studio 2026 &middot; Built block by block</span>
+      <span class="footer__fine">oneraidstudio.com</span>
+    </div>
+  </footer>
+
+  <script src="js/links.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/portfolio.js"></script>
+</body>
+</html>

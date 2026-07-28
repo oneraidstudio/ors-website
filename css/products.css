@@ -1,0 +1,17 @@
+/* ===========================================================================
+   ONE RAID STUDIO — products.css
+   Only what is unique to the packs page. Shared layout lives in base.css.
+   =========================================================================== */
+
+.page-head::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(54% 62% at 80% 18%,rgba(199,41,65,.2),transparent 70%);
+}
+
+.products{padding-block:0 var(--sec-y)}
+.products .card__body{padding:var(--sp-5);gap:var(--sp-3)}
+
+/* three packs — never let the last card stretch to full width */
+@media (min-width:961px){
+  .products .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--sp-6)}
+}
