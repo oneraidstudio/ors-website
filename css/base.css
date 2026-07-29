@@ -390,6 +390,29 @@ body.is-locked{overflow:hidden}
 .lede{max-width:62ch;font-size:var(--fs-lede);line-height:var(--lh-body);color:var(--text-muted)}
 .prose{max-width:62ch;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-muted)}
 
+/* .vh — present for crawlers and screen readers, absent on screen. Used for
+   copy that belongs in the document but is shown somewhere else visually
+   (portfolio tile descriptions, which surface in the lightbox). Never use it
+   to hide text that does not match what the page shows. */
+.vh{
+  position:absolute!important;width:1px;height:1px;
+  margin:-1px;padding:0;border:0;overflow:hidden;
+  clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;
+}
+
+/* reply-time promise — the single highest-value line on a services site, so
+   it gets a live-looking indicator rather than being buried in body copy */
+.promise{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.08em;
+  text-transform:uppercase;color:var(--neon-cyan);
+}
+.promise i{
+  display:block;width:8px;height:8px;flex-shrink:0;
+  background:var(--neon-cyan);box-shadow:0 0 10px var(--glow-cyan);
+  animation:pulse 2.4s ease-in-out infinite;
+}
+
 /* page head — shared by releases / services / portfolio */
 .page-head{position:relative;overflow:clip;padding-block:var(--sec-y-sm) clamp(20px,3vw,36px)}
 .page-head__inner{position:relative;display:flex;flex-direction:column;gap:var(--sp-3)}
@@ -612,7 +635,7 @@ body.is-locked{overflow:hidden}
 [data-motion="zero"] .hero__cube:hover .hero__cube__inner{transform:none}
 
 @media (prefers-reduced-motion:reduce){
-  .marquee__track,.hero__cube img,.hero__cube::before,.script,.chip{animation:none !important}
+  .marquee__track,.hero__cube img,.hero__cube::before,.script,.chip,.promise i{animation:none !important}
 }
 
 /* ------------------------------------------------------ 17 RESPONSIVE

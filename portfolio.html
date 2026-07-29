@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Portfolio — One Raid Studio</title>
-  <meta name="description" content="Selected work by One Raid Studio — custom Minecraft models, GUI and HUD pixel art, rank icons, plugins, and Discord bots built for real servers.">
+  <title>Sample Work — One Raid Studio</title>
+  <meta name="description" content="Sample work by One Raid Studio — custom Minecraft models, GUI and HUD pixel art, rank icons, plugins, apps and websites, built to show scope, technique and finish.">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0B0410">
   <link rel="canonical" href="https://oneraidstudio.com/portfolio.html">
@@ -13,15 +13,22 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://oneraidstudio.com/portfolio.html">
   <meta property="og:title" content="Portfolio — One Raid Studio">
-  <meta property="og:description" content="Selected work by One Raid Studio — custom Minecraft models, GUI and HUD pixel art, rank icons, plugins, and Discord bots built for real servers.">
+  <meta property="og:description" content="Sample work by One Raid Studio — custom Minecraft models, GUI and HUD pixel art, rank icons, plugins, apps and websites, built to show scope, technique and finish.">
   <meta property="og:image" content="https://oneraidstudio.com/assets/ors_1024x1024.png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="One Raid Studio logo — an isometric pixel cube with a planted sword">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/ors_16x16.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/ors_64x64.png">
   <link rel="icon" type="image/png" sizes="128x128" href="assets/ors_128x128.png">
   <link rel="apple-touch-icon" href="assets/ors_128x128.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- SEARCH CONSOLE — paste the tag Google gives you at search.google.com/search-console:
+       <meta name="google-site-verification" content="YOUR-TOKEN"> -->
+  <!-- ANALYTICS — paste one privacy-friendly snippet here (no cookie banner needed), e.g.
+       <script defer data-domain="oneraidstudio.com" src="https://plausible.io/js/script.js"></script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pirata+One&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -39,10 +46,39 @@
     }, true);
   </script>
   <noscript><style>.boot{display:none!important}</style></noscript>
+  <!-- ENTITY NOTE: "sameAs" below is how Google and AI crawlers connect this
+       site to your profiles. Append your MCModels and BuiltByBit vendor URLs
+       the moment they exist — it is the strongest signal you have. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://oneraidstudio.com/#org",
+        "name": "One Raid Studio",
+        "alternateName": "ORS",
+        "url": "https://oneraidstudio.com/",
+        "logo": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "image": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "slogan": "One Complete Solution",
+        "email": "oneraidstudios@gmail.com",
+        "foundingDate": "2026",
+        "description": "One Raid Studio is a creative-technical studio building custom 3D models, pixel art, plugins, and websites for Minecraft and Hytale servers.",
+        "knowsAbout": ["Minecraft","Hytale","Blockbench","Pixel art","Minecraft server icons","Minecraft GUI design","Minecraft plugins","Discord bots","Server automation"],
+        "sameAs": [
+          "https://x.com/GuyZ3RO",
+          "https://instagram.com/oneraidstudio",
+          "https://sketchfab.com/oneraidstudio"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "oneraidstudios@gmail.com",
+          "url": "https://discord.gg/TZjPy6kuQu",
+          "availableLanguage": ["English"]
+        }
+      },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -52,10 +88,12 @@
       },
       {
         "@type": "CollectionPage",
-        "name": "Portfolio — One Raid Studio",
+        "@id": "https://oneraidstudio.com/portfolio.html#page",
+        "name": "Sample work — One Raid Studio",
         "url": "https://oneraidstudio.com/portfolio.html",
-        "description": "Selected custom Minecraft models, pixel art, and plugins by One Raid Studio.",
-        "publisher": { "@type": "Organization", "name": "One Raid Studio", "url": "https://oneraidstudio.com/" }
+        "description": "Sample models, pixel art, plugins, apps, and websites built by One Raid Studio to show scope, technique, and finish.",
+        "isPartOf": { "@id": "https://oneraidstudio.com/#website" },
+        "publisher": { "@id": "https://oneraidstudio.com/#org" }
       }
     ]
   }
@@ -85,6 +123,7 @@
         <a class="nav__link" href="releases.html">Releases</a>
         <a class="nav__link" href="services.html">Services</a>
         <a class="nav__link" href="portfolio.html" aria-current="page">Portfolio</a>
+        <a class="nav__link" href="index.html#contact">Contact</a>
         <a class="btn btn--primary btn--sm" href="#" data-link="discord">Join Discord</a>
       </nav>
       <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -103,6 +142,7 @@
       <a class="drawer__link" href="releases.html">Releases</a>
       <a class="drawer__link" href="services.html">Services</a>
       <a class="drawer__link" href="portfolio.html" aria-current="page">Portfolio</a>
+      <a class="drawer__link" href="index.html#contact">Contact</a>
     </nav>
     <a class="btn btn--primary drawer__cta" href="#" data-link="discord">Join Discord</a>
   </div>
@@ -112,11 +152,11 @@
     <section class="page-head">
       <div class="wrap page-head__inner">
         <div class="sec-head__row">
-          <span class="eyebrow">Selected work</span>
+          <span class="eyebrow">Sample work</span>
           <span class="script" aria-hidden="true" style="--tilt:-8deg">Get Amazed!</span>
         </div>
         <h1 class="h1 tone-ice">New studio. Years of experience.</h1>
-        <p class="lede">One Raid Studio is a new name built on years of shipping custom models, pixel art, and plugins for the Minecraft community.</p>
+        <p class="lede">Every piece below is a studio sample &mdash; built by us, on our own time, to show the scope, technique and finish you get. Want something like one of these for your own server? That&rsquo;s a commission.</p>
       </div>
     </section>
 
@@ -139,101 +179,111 @@
           <figure class="shot" data-cat="models" data-span="2x1">
             <button class="shot__btn frame" type="button"
                     data-label="Weapon set &middot; not added yet"
-                    data-title="Weapon set"
-                    data-desc="A matched set of swords, axes and bows modelled in Blockbench for a PvP network. Every piece shares one 32×32 texture atlas so the whole set ships as a single resource pack with no extra draw calls.">
+                    data-title="Weapon set">
               <img data-slot src="assets/portfolio/dummy0.png" alt="Custom Minecraft weapon set modelled in Blockbench — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Weapon set</figcaption>
+            <p class="shot__desc vh">A matched set of swords, axes and bows modelled in Blockbench for PvP-style combat. Every piece shares one 32×32 texture atlas so the whole set ships as a single resource pack with no extra draw calls.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="pixel">
             <button class="shot__btn frame" type="button"
                     data-label="GUI &amp; HUD &middot; not added yet"
-                    data-title="GUI &amp; HUD"
-                    data-desc="Full interface pass for a survival server: chest menus, shop screens, quest log and an in-world HUD. Drawn at native resolution so nothing is ever scaled at runtime.">
+                    data-title="GUI &amp; HUD">
               <img data-slot src="assets/portfolio/dummy1.png" alt="Minecraft GUI and HUD pixel art — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>GUI &amp; HUD</figcaption>
+            <p class="shot__desc vh">Full interface pass in a survival-server style: chest menus, shop screens, quest log and an in-world HUD. Drawn at native resolution so nothing is ever scaled at runtime.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="models">
             <button class="shot__btn frame" type="button"
                     data-label="Mob model &middot; not added yet"
-                    data-title="Mob model"
-                    data-desc="Custom mob with a full walk, idle and attack rig. Built to stay readable at render distance without exceeding the vanilla entity bone budget.">
+                    data-title="Mob model">
               <img data-slot src="assets/portfolio/dummy2.png" alt="Custom Minecraft mob model with animation rig — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Mob model</figcaption>
+            <p class="shot__desc vh">Custom mob with a full walk, idle and attack rig. Built to stay readable at render distance without exceeding the vanilla entity bone budget.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="plugins">
             <button class="shot__btn frame" type="button"
                     data-label="Server dashboard &middot; not added yet"
-                    data-title="Server dashboard"
-                    data-desc="A web dashboard for staff: live player list, ban and mute queue, and per-world performance graphs. Talks to the server over a small plugin-side API.">
+                    data-title="Server dashboard">
               <img data-slot src="assets/portfolio/dummy0.png" alt="Minecraft server staff dashboard web app — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Server dashboard</figcaption>
+            <p class="shot__desc vh">A web dashboard for staff: live player list, ban and mute queue, and per-world performance graphs. Talks to the server over a small plugin-side API.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="pixel" data-span="2x2">
             <button class="shot__btn frame" type="button"
                     data-label="Rank icons &middot; not added yet"
-                    data-title="Rank icons"
-                    data-desc="A ladder of rank badges from starter to top tier, designed to read at 16×16 in chat and hold up when blown up on a store page. The colour ramp climbs with the tier so rank order is legible at a glance.">
+                    data-title="Rank icons">
               <img data-slot src="assets/portfolio/dummy1.png" alt="Minecraft rank icon ladder in pixel art — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Rank icons</figcaption>
+            <p class="shot__desc vh">A ladder of rank badges from starter to top tier, designed to read at 16×16 in chat and hold up when blown up on a store page. The colour ramp climbs with the tier so rank order is legible at a glance.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="models">
             <button class="shot__btn frame" type="button"
                     data-label="Furniture pack &middot; not added yet"
-                    data-title="Furniture pack"
-                    data-desc="Low-poly furniture for a roleplay server — seating, lighting, storage and clutter — all sharing one texture sheet and snapping cleanly to the block grid.">
+                    data-title="Furniture pack">
               <img data-slot src="assets/portfolio/dummy2.png" alt="Low-poly Minecraft furniture model pack — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Furniture pack</figcaption>
+            <p class="shot__desc vh">Low-poly furniture in a roleplay style — seating, lighting, storage and clutter — all sharing one texture sheet and snapping cleanly to the block grid.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="plugins">
             <button class="shot__btn frame" type="button"
                     data-label="Discord bot &middot; not added yet"
-                    data-title="Discord bot"
-                    data-desc="Links a Discord guild to a Minecraft server: role sync on rank purchase, in-game chat relay, and slash commands for ticket handling.">
+                    data-title="Discord bot">
               <img data-slot src="assets/portfolio/dummy0.png" alt="Discord bot linking a guild to a Minecraft server — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Discord bot</figcaption>
+            <p class="shot__desc vh">Links a Discord guild to a Minecraft server: role sync on rank purchase, in-game chat relay, and slash commands for ticket handling.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="pixel">
             <button class="shot__btn frame" type="button"
                     data-label="Server banner &middot; not added yet"
-                    data-title="Server banner"
-                    data-desc="Marketplace and social banner artwork, delivered at every size the listing pages ask for, from the wide header down to the square thumbnail.">
+                    data-title="Server banner">
               <img data-slot src="assets/portfolio/dummy1.png" alt="Minecraft server banner artwork — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Server banner</figcaption>
+            <p class="shot__desc vh">Marketplace and social banner artwork, delivered at every size the listing pages ask for, from the wide header down to the square thumbnail.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="apps">
             <button class="shot__btn frame" type="button"
                     data-label="Cosmetic set &middot; not added yet"
-                    data-title="Cosmetic set"
-                    data-desc="Wearable cosmetics — hats, capes and backpacks — modelled to sit correctly on both the default and slim player skins.">
+                    data-title="Cosmetic set">
               <img data-slot src="assets/portfolio/dummy2.png" alt="Minecraft cosmetic models: hats, capes and backpacks — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Cosmetic set</figcaption>
+            <p class="shot__desc vh">Wearable cosmetics — hats, capes and backpacks — modelled to sit correctly on both the default and slim player skins.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="websites" data-span="2x1">
             <button class="shot__btn frame" type="button"
                     data-label="Minigame plugin &middot; not added yet"
-                    data-title="Minigame plugin"
-                    data-desc="A round-based minigame for a network: queue and party handling, per-arena world resets between rounds, and a scoreboard that stays in sync across every server in the group.">
+                    data-title="Minigame plugin">
               <img data-slot src="assets/portfolio/dummy0.png" alt="Custom Minecraft minigame plugin arena and scoreboard — One Raid Studio" width="1200" height="900" loading="lazy" decoding="async">
             </button>
             <figcaption>Minigame plugin</figcaption>
+            <p class="shot__desc vh">A round-based minigame: queue and party handling, per-arena world resets between rounds, and a scoreboard that stays in sync across every server in the group.</p>
+            <span class="shot__flag">Sample</span>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
 
@@ -244,7 +294,7 @@
 
     <section class="band">
       <div class="wrap band__inner reveal">
-        <span class="eyebrow">There&rsquo;s more where that came from</span>
+        <span class="eyebrow">These are samples &mdash; yours would be built to brief</span>
         <h2 class="h2 tone-red">Want something like this?</h2>
         <a class="btn btn--primary btn--lg" href="index.html#contact">Start a project <span class="btn__caret" aria-hidden="true">&#9656;</span></a>
       </div>
@@ -263,6 +313,7 @@
       </div>
       <div class="lightbox__body">
         <div class="lightbox__meta">
+          <span class="tag tag--cyan">Studio sample</span>
           <span class="eyebrow" data-lb-cat></span>
           <span class="lightbox__counter" data-lb-counter></span>
         </div>
@@ -305,7 +356,7 @@
       </div>
     </div>
     <div class="footer__bar">
-      <span class="footer__fine">&copy; One Raid Studio 2026</span>
+      <span class="footer__fine">&copy; One Raid Studio <span data-year>2026</span></span>
       <span class="footer__fine">One Team &middot; One Brief &middot; One Complete Solution</span>
     </div>
   </footer>

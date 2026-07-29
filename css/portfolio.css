@@ -93,9 +93,20 @@
 .shot:hover .shot__zoom,
 .shot__btn:focus-visible ~ .shot__zoom{opacity:1;transform:none}
 
-.gallery[data-filter="models"] .shot:not([data-cat="models"]),
-.gallery[data-filter="pixel"] .shot:not([data-cat="pixel"]),
-.gallery[data-filter="plugins"] .shot:not([data-cat="plugins"]){display:none}
+/* Every tile is a studio sample, not a named client commission. The flag says
+   so on the tile itself so the claim is never implied by omission. */
+.shot__flag{
+  position:absolute;left:8px;top:8px;z-index:1;pointer-events:none;
+  font-family:var(--mono);font-weight:700;font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--white);
+  background:var(--brand-red-deep);border:1px solid var(--neon-red);padding:4px 7px;
+}
+
+/* Filtering is driven by portfolio.js, which flags non-matching tiles with
+   data-hidden. This single rule covers every category — previously each one
+   needed its own selector pair here, so a new filter button silently did
+   nothing until this block was edited too. */
+.shot[data-hidden]{display:none}
 
 .gallery__empty{
   grid-column:1 / -1;padding:var(--sp-8) var(--sp-5);text-align:center;

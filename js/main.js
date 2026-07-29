@@ -398,6 +398,14 @@
     body.classList.toggle('is-locked', on);
   };
 
+  /* ------------------------------------------------------------- year
+     Footer copyright. Marked up as <span data-year>2026</span> so the page
+     still shows a sensible year with JS off. */
+  var years = document.querySelectorAll('[data-year]');
+  for (var yi = 0; yi < years.length; yi++) {
+    years[yi].textContent = new Date().getFullYear();
+  }
+
   /* -------------------------------------------------------- copy email */
   var copyBtn = document.querySelector('[data-copy-email]');
   var status = document.querySelector('[data-copy-status]');

@@ -1,0 +1,15 @@
+{
+  "name": "One Raid Studio",
+  "short_name": "O.R.S",
+  "description": "Custom 3D models, pixel art, and plugins for Minecraft and Hytale servers.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#0B0410",
+  "theme_color": "#0B0410",
+  "icons": [
+    { "src": "/assets/ors_64x64.png", "sizes": "64x64", "type": "image/png" },
+    { "src": "/assets/ors_128x128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "/assets/ors_1024x1024.png", "sizes": "1024x1024", "type": "image/png", "purpose": "any" }
+  ]
+}

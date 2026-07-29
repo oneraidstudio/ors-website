@@ -1,0 +1,8 @@
+# One Raid Studio — https://oneraidstudio.com/
+# Everything is public. The only job this file has is pointing crawlers at the
+# sitemap; keep it that way unless you add a staging or admin path.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://oneraidstudio.com/sitemap.xml

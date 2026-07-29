@@ -32,3 +32,74 @@
 @media (max-width:420px){
   .icon-frame{width:84px;height:84px}
 }
+
+/* --------------------------------------------------------------- PRICING
+   Five cards, same physical model as everything else: hard maroon shadow at
+   rest, lift on hover. auto-fit means the row reflows to 5 / 3 / 2 / 1 as the
+   viewport narrows without a breakpoint per count.                        */
+.price{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:var(--sp-4);list-style:none;margin:0;padding:0;
+}
+.price__card{
+  display:flex;flex-direction:column;gap:10px;
+  padding:var(--sp-5) var(--sp-4);
+  background:var(--surface);border:2px solid var(--border);box-shadow:var(--sh-2);
+  transition:transform var(--dur) var(--ease),box-shadow var(--dur) var(--ease),
+             border-color var(--dur) var(--ease);
+}
+.price__card:hover{transform:translate(-2px,-2px);box-shadow:var(--sh-3);border-color:var(--neon-cyan)}
+.price__card .tag{align-self:flex-start}
+.price__card--lead{background:var(--brand-red-deep);border-color:var(--neon-red);box-shadow:var(--sh-2),var(--glow-sm)}
+.price__card--lead:hover{border-color:var(--neon-red);box-shadow:var(--sh-3),var(--glow-md)}
+.price__card--lead .price__text{color:rgba(255,255,255,.9)}
+.price__card--lead .price__unit{color:rgba(255,255,255,.78)}
+
+.price__amt{display:flex;align-items:baseline;gap:7px;color:var(--text)}
+.price__amt small{
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-dim);
+}
+.price__card--lead .price__amt small{color:rgba(255,255,255,.78)}
+.price__amt b{font-family:var(--pixel);font-weight:600;font-size:1.9rem;line-height:1}
+.price__unit{
+  font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;
+  text-transform:uppercase;color:var(--text-dim);
+}
+.price__text{font-size:var(--fs-sm);line-height:1.55;color:var(--text-muted)}
+.price__note{
+  max-width:78ch;margin-top:var(--sp-5);
+  font-size:var(--fs-sm);line-height:1.6;color:var(--text-dim);
+}
+
+/* --------------------------------------------------------------- PROCESS
+   Numbered steps. The number is a watermark behind its own step rather than a
+   badge beside the title, so five columns stay readable at 200px each.     */
+.proc{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:var(--sp-4);list-style:none;margin:0;padding:0;counter-reset:none;
+}
+.proc__step{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:10px;
+  padding:var(--sp-5) var(--sp-4);
+  background:var(--surface);border:2px solid var(--border);box-shadow:var(--sh-1);
+  transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease);
+}
+.proc__step:hover{border-color:var(--brand-red);box-shadow:var(--sh-2)}
+.proc__num{
+  position:absolute;top:-6px;right:6px;pointer-events:none;
+  font-family:var(--arcade);font-size:2.4rem;line-height:1;
+  color:transparent;-webkit-text-fill-color:transparent;
+  -webkit-text-stroke:1px var(--maroon);opacity:.85;
+}
+.proc__title{
+  position:relative;
+  font-family:var(--pixel);font-weight:600;font-size:1.15rem;line-height:1.15;color:var(--text);
+}
+.proc__text{position:relative;font-size:var(--fs-sm);line-height:1.55;color:var(--text-muted)}
+
+@media (max-width:560px){
+  .price,.proc{grid-template-columns:1fr}
+  .proc__num{font-size:2rem}
+}

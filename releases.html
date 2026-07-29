@@ -17,11 +17,18 @@
   <meta property="og:image" content="https://oneraidstudio.com/assets/ors_1024x1024.png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="One Raid Studio logo — an isometric pixel cube with a planted sword">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/ors_16x16.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/ors_64x64.png">
   <link rel="icon" type="image/png" sizes="128x128" href="assets/ors_128x128.png">
   <link rel="apple-touch-icon" href="assets/ors_128x128.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- SEARCH CONSOLE — paste the tag Google gives you at search.google.com/search-console:
+       <meta name="google-site-verification" content="YOUR-TOKEN"> -->
+  <!-- ANALYTICS — paste one privacy-friendly snippet here (no cookie banner needed), e.g.
+       <script defer data-domain="oneraidstudio.com" src="https://plausible.io/js/script.js"></script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pirata+One&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -39,10 +46,39 @@
     }, true);
   </script>
   <noscript><style>.boot{display:none!important}</style></noscript>
+  <!-- ENTITY NOTE: "sameAs" below is how Google and AI crawlers connect this
+       site to your profiles. Append your MCModels and BuiltByBit vendor URLs
+       the moment they exist — it is the strongest signal you have. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://oneraidstudio.com/#org",
+        "name": "One Raid Studio",
+        "alternateName": "ORS",
+        "url": "https://oneraidstudio.com/",
+        "logo": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "image": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "slogan": "One Complete Solution",
+        "email": "oneraidstudios@gmail.com",
+        "foundingDate": "2026",
+        "description": "One Raid Studio is a creative-technical studio building custom 3D models, pixel art, plugins, and websites for Minecraft and Hytale servers.",
+        "knowsAbout": ["Minecraft","Hytale","Blockbench","Pixel art","Minecraft server icons","Minecraft GUI design","Minecraft plugins","Discord bots","Server automation"],
+        "sameAs": [
+          "https://x.com/GuyZ3RO",
+          "https://instagram.com/oneraidstudio",
+          "https://sketchfab.com/oneraidstudio"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "oneraidstudios@gmail.com",
+          "url": "https://discord.gg/TZjPy6kuQu",
+          "availableLanguage": ["English"]
+        }
+      },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
@@ -59,7 +95,7 @@
             "name": "All Your Iconz",
             "description": "150 ready-to-use pixel-art server icons for Minecraft servers.",
             "image": "https://oneraidstudio.com/assets/products/all-your-iconz.png",
-            "brand": { "@type": "Brand", "name": "One Raid Studio" },
+            "brand": { "@id": "https://oneraidstudio.com/#org" },
             "category": "Minecraft server icon pack"
           }},
           { "@type": "ListItem", "position": 2, "item": {
@@ -67,7 +103,7 @@
             "name": "All Your Meme Emojis",
             "description": "45 meme emojis for Minecraft server chat, free on MCModels.",
             "image": "https://oneraidstudio.com/assets/products/all-your-meme-emojis.png",
-            "brand": { "@type": "Brand", "name": "One Raid Studio" },
+            "brand": { "@id": "https://oneraidstudio.com/#org" },
             "category": "Minecraft emoji pack",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
           }},
@@ -76,7 +112,7 @@
             "name": "All Your Hamster Emojis",
             "description": "25 hamster emojis for Minecraft server chat, free on MCModels.",
             "image": "https://oneraidstudio.com/assets/products/all-your-hamster-emojis.png",
-            "brand": { "@type": "Brand", "name": "One Raid Studio" },
+            "brand": { "@id": "https://oneraidstudio.com/#org" },
             "category": "Minecraft emoji pack",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" }
           }}
@@ -85,12 +121,12 @@
       {
         "@type": "FAQPage",
         "mainEntity": [
-          { "@type": "Question", "name": "What do I get in All Your Iconz?",
-            "acceptedAnswer": { "@type": "Answer", "text": "150 pixel-art server icons for Minecraft, delivered as ready-to-use image files. Swap them through the year — seasonal events, updates, themed weekends — or use them across your store pages and Discord." } },
-          { "@type": "Question", "name": "Are the emoji packs actually free?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. All Your Meme Emojis (45 emojis) and All Your Hamster Emojis (25 emojis) are completely free on MCModels — download them, drop them into your chat setup, and you're done." } },
+          { "@type": "Question", "name": "Where can I purchase your asset packs?",
+            "acceptedAnswer": { "@type": "Answer", "text": "All asset packs can be found at MCModels. Follow us on MCModels so you never miss out!" } },
+          { "@type": "Question", "name": "Is there going to be more free packs in future?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Definitely! We will try our best to include a free pack with every release of a Major asset pack. Follow us on MCModels so you don't miss out. Join our Discord server so you get a sneak peek on the NEXT!" } },
           { "@type": "Question", "name": "Can you customize a pack for my server?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. If a pack is close but not quite your style, hop into our Discord — recolors and small tweaks are quick, and bigger changes or fully custom packs fall under our services." } }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. If a pack is close but not quite your style, hop into our Discord \u2014 recolors and small tweaks are quick, and bigger changes or fully custom packs fall under our services." } }
         ]
       }
     ]
@@ -121,6 +157,7 @@
         <a class="nav__link" href="releases.html" aria-current="page">Releases</a>
         <a class="nav__link" href="services.html">Services</a>
         <a class="nav__link" href="portfolio.html">Portfolio</a>
+        <a class="nav__link" href="index.html#contact">Contact</a>
         <a class="btn btn--primary btn--sm" href="#" data-link="discord">Join Discord</a>
       </nav>
       <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -139,6 +176,7 @@
       <a class="drawer__link" href="releases.html" aria-current="page">Releases</a>
       <a class="drawer__link" href="services.html">Services</a>
       <a class="drawer__link" href="portfolio.html">Portfolio</a>
+      <a class="drawer__link" href="index.html#contact">Contact</a>
     </nav>
     <a class="btn btn--primary drawer__cta" href="#" data-link="discord">Join Discord</a>
   </div>
@@ -286,7 +324,7 @@
       </div>
     </div>
     <div class="footer__bar">
-      <span class="footer__fine">&copy; One Raid Studio 2026</span>
+      <span class="footer__fine">&copy; One Raid Studio <span data-year>2026</span></span>
       <span class="footer__fine">One Team &middot; One Brief &middot; One Complete Solution</span>
     </div>
   </footer>

@@ -30,7 +30,16 @@
   var btns = document.querySelectorAll('.filter');
   var count = document.querySelector('[data-filter-count]');
   var empty = document.querySelector('.gallery__empty');
-  var LABELS = { all: 'all work', models: 'models', pixel: 'pixel art', plugins: 'plugins' };
+
+  /* Labels are read off the buttons themselves rather than kept in a list
+     here, so a category can never be half-registered. To add one: drop in a
+     <button class="filter" data-filter="key">Label</button> and tag tiles
+     with data-cat="key". Nothing in this file or the CSS needs touching. */
+  var LABELS = {};
+  for (var b = 0; b < btns.length; b++) {
+    LABELS[btns[b].getAttribute('data-filter')] =
+      (btns[b].textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  }
 
   function valid(key) {
     return Object.prototype.hasOwnProperty.call(LABELS, key) ? key : 'all';
@@ -39,7 +48,7 @@
   function visibleShots() {
     return Array.prototype.filter.call(
       gallery.querySelectorAll('.shot'),
-      function (s) { return s.offsetParent !== null; }
+      function (s) { return !s.hasAttribute('data-hidden'); }
     );
   }
 
@@ -51,6 +60,17 @@
       var on = btns[i].getAttribute('data-filter') === filter;
       btns[i].classList.toggle('is-on', on);
       btns[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+    }
+
+    // Non-matching tiles are marked here instead of by a per-category CSS
+    // selector, which had to be extended by hand for every new filter.
+    var shots = gallery.querySelectorAll('.shot');
+    for (var s = 0; s < shots.length; s++) {
+      if (filter === 'all' || shots[s].getAttribute('data-cat') === filter) {
+        shots[s].removeAttribute('data-hidden');
+      } else {
+        shots[s].setAttribute('data-hidden', '');
+      }
     }
 
     var shown = visibleShots().length;
@@ -119,7 +139,11 @@
     lbImg.alt = img ? (img.getAttribute('alt') || '') : '';
 
     lbTitle.textContent = btn.getAttribute('data-title') || '';
-    lbDesc.textContent = btn.getAttribute('data-desc') || '';
+    // The description lives in a visually-hidden <p> inside the figure rather
+    // than a data-desc attribute — attribute text is invisible to crawlers and
+    // to screen readers, so the copy is in the DOM and read from there.
+    var descEl = shot.querySelector('.shot__desc');
+    lbDesc.textContent = descEl ? descEl.textContent.trim() : '';
     lbCat.textContent = LABELS[shot.getAttribute('data-cat')] || '';
     lbCounter.textContent = (index + 1) + ' / ' + list.length;
   }

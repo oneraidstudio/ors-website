@@ -17,11 +17,18 @@
   <meta property="og:image" content="https://oneraidstudio.com/assets/ors_1024x1024.png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
+  <meta property="og:image:alt" content="One Raid Studio logo — an isometric pixel cube with a planted sword">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/ors_16x16.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/ors_64x64.png">
   <link rel="icon" type="image/png" sizes="128x128" href="assets/ors_128x128.png">
   <link rel="apple-touch-icon" href="assets/ors_128x128.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- SEARCH CONSOLE — paste the tag Google gives you at search.google.com/search-console:
+       <meta name="google-site-verification" content="YOUR-TOKEN"> -->
+  <!-- ANALYTICS — paste one privacy-friendly snippet here (no cookie banner needed), e.g.
+       <script defer data-domain="oneraidstudio.com" src="https://plausible.io/js/script.js"></script> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Pirata+One&family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Space+Grotesk:wght@400..700&display=swap" rel="stylesheet">
@@ -39,6 +46,9 @@
     }, true);
   </script>
   <noscript><style>.boot{display:none!important}</style></noscript>
+  <!-- ENTITY NOTE: "sameAs" below is how Google and AI crawlers connect this
+       site to your profiles. Append your MCModels and BuiltByBit vendor URLs
+       the moment they exist — it is the strongest signal you have. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,7 +57,27 @@
         "@type": "Organization",
         "@id": "https://oneraidstudio.com/#org",
         "name": "One Raid Studio",
-        "url": "https://oneraidstudio.com/"
+        "alternateName": "ORS",
+        "url": "https://oneraidstudio.com/",
+        "logo": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "image": "https://oneraidstudio.com/assets/ors_1024x1024.png",
+        "slogan": "One Complete Solution",
+        "email": "oneraidstudios@gmail.com",
+        "foundingDate": "2026",
+        "description": "One Raid Studio is a creative-technical studio building custom 3D models, pixel art, plugins, and websites for Minecraft and Hytale servers.",
+        "knowsAbout": ["Minecraft","Hytale","Blockbench","Pixel art","Minecraft server icons","Minecraft GUI design","Minecraft plugins","Discord bots","Server automation"],
+        "sameAs": [
+          "https://x.com/GuyZ3RO",
+          "https://instagram.com/oneraidstudio",
+          "https://sketchfab.com/oneraidstudio"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "email": "oneraidstudios@gmail.com",
+          "url": "https://discord.gg/TZjPy6kuQu",
+          "availableLanguage": ["English"]
+        }
       },
       {
         "@type": "BreadcrumbList",
@@ -61,21 +91,24 @@
         "name": "3D Design",
         "serviceType": "Custom 3D modeling (Blockbench)",
         "description": "Custom Blockbench models for Minecraft and Hytale — cosmetics, weapons, mobs, props, furniture, and environments.",
-        "provider": { "@id": "https://oneraidstudio.com/#org" }
+        "provider": { "@id": "https://oneraidstudio.com/#org" },
+        "areaServed": "Worldwide"
       },
       {
         "@type": "Service",
         "name": "Pixel Art",
         "serviceType": "Pixel art and texturing",
         "description": "Pixel art for Minecraft servers — GUIs, HUDs, item textures, rank icons, banners, server icons, and full texture packs.",
-        "provider": { "@id": "https://oneraidstudio.com/#org" }
+        "provider": { "@id": "https://oneraidstudio.com/#org" },
+        "areaServed": "Worldwide"
       },
       {
         "@type": "Service",
         "name": "Development",
         "serviceType": "Plugin and automation development",
         "description": "Minecraft and Hytale plugins, Discord bots, server tools, websites, and workflow automation.",
-        "provider": { "@id": "https://oneraidstudio.com/#org" }
+        "provider": { "@id": "https://oneraidstudio.com/#org" },
+        "areaServed": "Worldwide"
       },
       {
         "@type": "FAQPage",
@@ -85,7 +118,9 @@
           { "@type": "Question", "name": "How long does a project take?",
             "acceptedAnswer": { "@type": "Answer", "text": "It depends on the brief. A single model or an icon set moves quickly; a full interface pass or a plugin with a custom system takes longer. You get a timeline with the quote, and you'll see work-in-progress as we go rather than one drop at the end." } },
           { "@type": "Question", "name": "Can you match my server's existing style?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes — that's most of what we do. Send references, your current resource pack, or screenshots of the server, and new assets get built to sit next to what you already have instead of fighting it." } }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes — that's most of what we do. Send references, your current resource pack, or screenshots of the server, and new assets get built to sit next to what you already have instead of fighting it." } },
+          { "@type": "Question", "name": "How fast do you reply?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Within 24 hours on our Discord, usually much sooner. Open a ticket with what you need and you'll get a scope question or a quote back on the same thread." } }
         ]
       }
     ]
@@ -116,6 +151,7 @@
         <a class="nav__link" href="releases.html">Releases</a>
         <a class="nav__link" href="services.html" aria-current="page">Services</a>
         <a class="nav__link" href="portfolio.html">Portfolio</a>
+        <a class="nav__link" href="index.html#contact">Contact</a>
         <a class="btn btn--primary btn--sm" href="#" data-link="discord">Join Discord</a>
       </nav>
       <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
@@ -134,6 +170,7 @@
       <a class="drawer__link" href="releases.html">Releases</a>
       <a class="drawer__link" href="services.html" aria-current="page">Services</a>
       <a class="drawer__link" href="portfolio.html">Portfolio</a>
+      <a class="drawer__link" href="index.html#contact">Contact</a>
     </nav>
     <a class="btn btn--primary drawer__cta" href="#" data-link="discord">Join Discord</a>
   </div>
@@ -193,7 +230,8 @@
             <p class="svc__text">Pixel art for every surface — GUIs and HUDs, item textures, rank icons, banners, and server icons. We&rsquo;ve shipped full texture packs too.</p>
             <ul class="pills" aria-label="Texturing deliverables">
               <li class="pill">GUIs &amp; HUDs</li>
-              <li class="pill">Item textures</li>
+              <li class="pill">2D Items</li>
+              <li class="pill">Textures</li>
               <li class="pill">Rank tags</li>
               <li class="pill">Banners</li>
               <li class="pill">16px & 32px</li>
@@ -228,6 +266,104 @@
       </div>
     </section>
 
+    <!-- ===================================================================
+         PRICING
+         The five money figures below are PLACEHOLDERS. Each is tagged with
+         the marker  SET-PRICE  so you can grep for them. Replace all five
+         before this page goes live — a wrong price costs more than no price.
+         Same goes for the "24 hours" reply promise and the "two rounds" of
+         revisions in the process section underneath.
+         =================================================================== -->
+    <section class="sec sec--rule" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <div class="sec-head sec-head--tight reveal">
+          <div class="sec-head__row">
+            <span class="eyebrow">What it costs</span>
+            <span class="script" aria-hidden="true" style="--tilt:-5deg">Rates</span>
+          </div>
+          <h2 class="h2 tone-ice" id="pricing-title">Starting prices</h2>
+          <p class="lede">Honest numbers so you know where you stand before you message us. Every job still gets quoted on its own scope — these are floors, not finals.</p>
+        </div>
+
+        <ul class="price reveal" aria-label="Starting prices by service">
+          <li class="price__card">
+            <span class="tag tag--cyan">Icons &amp; emojis</span>
+            <p class="price__amt"><small>from</small> <b>$2</b></p><!-- SET-PRICE -->
+            <span class="price__unit">per set</span>
+            <p class="price__text">Server icons, chat emojis and rank badges. Recolors of an existing pack sit here too.</p>
+          </li>
+          <li class="price__card">
+            <span class="tag tag--cyan">Pixel art &amp; GUI</span>
+            <p class="price__amt"><small>from</small> <b>$10</b></p><!-- SET-PRICE -->
+            <span class="price__unit">per screen</span>
+            <p class="price__text">Chest menus, shop screens, quest logs, HUDs and item textures, drawn at native resolution.</p>
+          </li>
+          <li class="price__card">
+            <span class="tag tag--cyan">3D models</span>
+            <p class="price__amt"><small>from</small> <b>$20</b></p><!-- SET-PRICE -->
+            <span class="price__unit">per model</span>
+            <p class="price__text">Cosmetics, weapons, props, furniture and mobs in Blockbench. Can be rigged and animated if needed.</p>
+          </li>
+          <li class="price__card">
+            <span class="tag tag--cyan">Plugins &amp; automation</span>
+            <p class="price__amt"><small>from</small> <b>$50</b></p><!-- SET-PRICE -->
+            <span class="price__unit">per build</span>
+            <p class="price__text">Custom systems, commands, Discord bots and server tools, delivered with proper documentation.</p>
+          </li>
+          <li class="price__card price__card--lead">
+            <span class="tag">Full server package</span>
+            <p class="price__amt"><small>from</small> <b>$250</b></p><!-- SET-PRICE -->
+            <span class="price__unit">one brief</span>
+            <p class="price__text">Models, pixel art and the plugin that ties them together — one team, one timeline, one invoice.</p>
+          </li>
+        </ul>
+
+        <p class="price__note">Prices are in USD. You get a fixed quote before any work starts — no hourly billing and no surprise invoices. Bulk sets and repeat work are priced better than the figures above.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <span class="ghostword ghostword--l" aria-hidden="true">FLOW</span>
+        <div class="sec-head sec-head--tight reveal">
+          <div class="sec-head__row">
+            <span class="eyebrow">Commission Lifecycle</span>
+            <span class="script" aria-hidden="true" style="--tilt:6deg">Process</span>
+          </div>
+          <h2 class="h2 tone-red" id="process-title">From brief to handover</h2>
+          <p class="promise"><i aria-hidden="true"></i>We reply within 24 hours &mdash; usually much sooner</p>
+        </div>
+
+        <ol class="proc reveal">
+          <li class="proc__step">
+            <span class="proc__num" aria-hidden="true">01</span>
+            <h3 class="proc__title">Brief</h3>
+            <p class="proc__text">Open a ticket in our Discord and tell us what you need. References, screenshots or your current resource pack all help &mdash; the more we can see, the tighter the quote.</p>
+          </li>
+          <li class="proc__step">
+            <span class="proc__num" aria-hidden="true">02</span>
+            <h3 class="proc__title">Quote &amp; timeline</h3>
+            <p class="proc__text">You get a fixed price and a delivery window in writing before anything is built. If the scope changes later, the quote changes first followed by the deadline.</p>
+          </li>
+          <li class="proc__step">
+            <span class="proc__num" aria-hidden="true">03</span>
+            <h3 class="proc__title">Work in Progress</h3>
+            <p class="proc__text">Updates no matter how small, lands in your ticket as it happens, so you steer it early rather than reacting to one big drop at the end.</p>
+          </li>
+          <li class="proc__step">
+            <span class="proc__num" aria-hidden="true">04</span>
+            <h3 class="proc__title">Revisions</h3>
+            <p class="proc__text">Two rounds of changes are included. Recolors and Minor changes are free; a major change of shape or scope will be charged.</p>
+          </li>
+          <li class="proc__step">
+            <span class="proc__num" aria-hidden="true">05</span>
+            <h3 class="proc__title">Handover</h3>
+            <p class="proc__text">Final files in the formats your setup actually uses &mdash; source models, texture sheets, resource pack, plugin jar and config &mdash; plus a walkthrough of how to drop them in.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <section class="band">
       <div class="wrap band__inner reveal">
         <span class="eyebrow">From first concept to final build</span>
@@ -256,7 +392,7 @@
               <span class="faq__sign" aria-hidden="true"></span>
             </summary>
             <div class="faq__a">
-              <p>Every build is quoted on scope — how many models, how much pixel art, and whether there&rsquo;s plugin work tying it together. Tell us what you&rsquo;re planning in Discord and you&rsquo;ll get a price and a timeline before any work starts.</p>
+              <p>Starting prices are listed in <a href="#pricing">starting prices</a> above. Beyond that every build is quoted on scope — how many models, how much pixel art, and whether there&rsquo;s plugin work tying it together. Tell us what you&rsquo;re planning in Discord and you&rsquo;ll get a price and a timeline before any work starts.</p>
             </div>
           </details>
 
@@ -277,6 +413,15 @@
             </summary>
             <div class="faq__a">
               <p>Yes — that&rsquo;s most of what we do. Send references, your current resource pack, or screenshots of the server, and new assets get built to sit next to what you already have instead of fighting it.</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__q">
+              How fast do you reply?
+              <span class="faq__sign" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__a">
+              <p>Within 24 hours on our Discord, usually much sooner. Open a ticket with what you need and you&rsquo;ll get a scope question or a quote back on the same thread.</p>
             </div>
           </details>
         </div>
@@ -318,7 +463,7 @@
       </div>
     </div>
     <div class="footer__bar">
-      <span class="footer__fine">&copy; One Raid Studio 2026</span>
+      <span class="footer__fine">&copy; One Raid Studio <span data-year>2026</span></span>
       <span class="footer__fine">One Team &middot; One Brief &middot; One Complete Solution</span>
     </div>
   </footer>
