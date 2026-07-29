@@ -398,6 +398,24 @@
     body.classList.toggle('is-locked', on);
   };
 
+  /* ------------------------------------------------ process rail (touch)
+     On pointer devices the rail under the process cards fills on hover, in
+     CSS. Touch screens have no hover, so each checkpoint lights as its card
+     scrolls into view instead. The class is always added — services.css only
+     honours it inside @media (hover:none), so the two behaviours can't both
+     be live, and a rotation or resize re-decides without any JS involved. */
+  var procItems = document.querySelectorAll('.proc__item');
+  if (procItems.length && 'IntersectionObserver' in window) {
+    var procObs = new IntersectionObserver(function (entries) {
+      for (var pe = 0; pe < entries.length; pe++) {
+        if (!entries[pe].isIntersecting) continue;
+        entries[pe].target.classList.add('is-reached');
+        procObs.unobserve(entries[pe].target);
+      }
+    }, { rootMargin: '0px 0px -25% 0px', threshold: 0.35 });
+    for (var pi = 0; pi < procItems.length; pi++) procObs.observe(procItems[pi]);
+  }
+
   /* ------------------------------------------------------------- year
      Footer copyright. Marked up as <span data-year>2026</span> so the page
      still shows a sensible year with JS off. */

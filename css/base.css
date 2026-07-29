@@ -30,6 +30,7 @@
   --neon-red:#FF2E4D;
   --neon-cyan:#00E5FF;
   --neon-magenta:#FF2D95;
+  --neon-lime:#B6FF3B;       /* prices only — 15.9:1 on --surface, 11.3:1 on --brand-red-deep */
   --white:#FEFEFE;
 
   /* text — every value below clears 4.5:1 on --bg and --surface */
@@ -40,6 +41,7 @@
   --teal-deep:#0D4F59;       /* the cyan counterpart to --maroon           */
   --glow-red:rgba(255,46,77,.62);
   --glow-cyan:rgba(0,229,255,.5);
+  --glow-lime:rgba(182,255,59,.45);
   --chrome:linear-gradient(180deg,#FFFFFF 0%,#E7ECF4 22%,#AAB4C6 50%,#6E7488 68%,#EAB8C6 88%,#00E5FF 100%);
 
   /* type families */

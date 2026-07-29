@@ -61,7 +61,14 @@
   text-transform:uppercase;color:var(--text-dim);
 }
 .price__card--lead .price__amt small{color:rgba(255,255,255,.78)}
-.price__amt b{font-family:var(--pixel);font-weight:600;font-size:1.9rem;line-height:1}
+/* Body face, not the pixel face: Pixelify renders digits at a chunky low-res
+   weight that fought the rest of the card. Same 1.9rem as before, lime so the
+   number is the first thing the eye lands on in either card style. */
+.price__amt b{
+  font-family:var(--body);font-weight:700;font-size:1.9rem;line-height:1;
+  color:var(--neon-lime);text-shadow:0 0 18px var(--glow-lime);
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+}
 .price__unit{
   font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;
   text-transform:uppercase;color:var(--text-dim);
@@ -73,14 +80,27 @@
 }
 
 /* --------------------------------------------------------------- PROCESS
-   Numbered steps. The number is a watermark behind its own step rather than a
-   badge beside the title, so five columns stay readable at 200px each.     */
+   Five steps with a progress rail under them. Each <li class="proc__item">
+   owns its card AND its own segment of the rail, which is what lets the fill
+   stop at the hovered card with no JS on pointer devices.
+
+   State rides on the item as four custom properties — --fill (0 → 1) plus the
+   three --dot-* colours — so one set of state rules drives both the
+   horizontal rail and the vertical one on narrow screens. Only the axis of
+   the scale changes between them.                                         */
 .proc{
   display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:var(--sp-4);list-style:none;margin:0;padding:0;counter-reset:none;
+  gap:var(--sp-4);list-style:none;margin:0;padding:0;
+}
+.proc__item{
+  --fill:0;
+  --dot:var(--border);
+  --dot-in:var(--surface-2);
+  --dot-glow:none;
+  display:flex;flex-direction:column;min-width:0;
 }
 .proc__step{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;flex:1;
   display:flex;flex-direction:column;gap:10px;
   padding:var(--sp-5) var(--sp-4);
   background:var(--surface);border:2px solid var(--border);box-shadow:var(--sh-1);
@@ -99,7 +119,84 @@
 }
 .proc__text{position:relative;font-size:var(--fs-sm);line-height:1.55;color:var(--text-muted)}
 
+/* ------ the rail. Each segment runs from its OWN checkpoint to the next
+   one's, so it crosses the grid gap and the track reads as a single line. The
+   last item has no segment — there is nothing after it to reach. Anchoring
+   every segment the same way means one set of state rules drives both the
+   horizontal rail and the vertical one further down.                      */
+.proc__mark{position:relative;flex:0 0 auto;height:16px;margin-top:14px}
+.proc__mark::before,
+.proc__mark i{
+  position:absolute;top:50%;height:2px;
+  /* left edge at this dot, right edge at the next dot: half this item plus
+     one gap. Percentages resolve against .proc__mark, which is item-width. */
+  left:50%;right:calc(-50% - var(--sp-4));
+  transform:translateY(-50%);
+}
+.proc__mark::before{content:"";background:var(--rule)}
+.proc__mark i{
+  background:var(--neon-red);box-shadow:0 0 10px var(--glow-red);
+  transform:translateY(-50%) scaleX(var(--fill));transform-origin:left center;
+  transition:transform var(--dur) var(--ease);
+}
+.proc__item:last-child .proc__mark::before,
+.proc__item:last-child .proc__mark i{display:none}
+
+/* the checkpoint. Paints after the fill, so the dot always sits on top. */
+.proc__mark::after{
+  content:"";position:absolute;top:50%;left:50%;
+  width:12px;height:12px;transform:translate(-50%,-50%);
+  background:var(--dot-in);border:2px solid var(--dot);box-shadow:var(--dot-glow);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+
+/* ------ hover fill. Light everything, then dial back from the hovered card:
+   CSS can select later siblings but not earlier ones, so the logic runs
+   backwards. Specificity climbs with each rule, so source order holds.
+   A segment belongs to the step it leaves, which is why the hovered card
+   lights its own dot but not its outgoing line.                           */
+@media (hover:hover){
+  .proc:has(.proc__step:hover) .proc__item{
+    --fill:1;--dot:var(--neon-red);--dot-in:var(--neon-red);--dot-glow:0 0 12px var(--glow-red);
+  }
+  .proc:has(.proc__step:hover) .proc__item:has(.proc__step:hover){--fill:0}
+  .proc:has(.proc__step:hover) .proc__item:has(.proc__step:hover) ~ .proc__item{
+    --fill:0;--dot:var(--border);--dot-in:var(--surface-2);--dot-glow:none;
+  }
+}
+
+/* ------ touch screens have no hover, so the rail fills as you scroll past
+   instead. main.js adds .is-reached; the styling is scoped here so the two
+   behaviours can never both be live on the same device.                   */
+@media (hover:none){
+  .proc__item.is-reached{
+    --fill:1;--dot:var(--neon-red);--dot-in:var(--neon-red);--dot-glow:0 0 12px var(--glow-red);
+  }
+}
+
 @media (max-width:560px){
-  .price,.proc{grid-template-columns:1fr}
+  .price{grid-template-columns:1fr}
   .proc__num{font-size:2rem}
+
+  /* stacked: the rail rotates into a vertical timeline down the left edge.
+     Same anchoring — each segment leaves its own dot and reaches the next
+     card's — so every state rule above keeps working unchanged.            */
+  .proc{grid-template-columns:1fr;gap:0}
+  .proc__item{
+    display:grid;grid-template-columns:26px minmax(0,1fr);
+    column-gap:var(--sp-4);align-items:stretch;
+  }
+  .proc__mark{grid-column:1;grid-row:1;width:26px;height:auto;margin-top:0}
+  .proc__step{grid-column:2;grid-row:1;margin-bottom:var(--sp-4)}
+  .proc__item:last-child .proc__step{margin-bottom:0}
+
+  .proc__mark::before,
+  .proc__mark i{
+    top:16px;bottom:-16px;left:50%;right:auto;
+    width:2px;height:auto;
+    transform:translateX(-50%);
+  }
+  .proc__mark i{transform:translateX(-50%) scaleY(var(--fill));transform-origin:center top}
+  .proc__mark::after{top:16px}
 }
