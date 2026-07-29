@@ -19,17 +19,17 @@
 
   var LINKS = {
     /* primary CTA — every "Join Discord" button on the site */
-    discord: 'https://discord.gg/oneraidstudio',              // PLACEHOLDER
+    discord: 'https://discord.gg/JSKgckkpwZ',              // PLACEHOLDER
 
     /* socials */
-    x: 'https://x.com/oneraidstudio',                          // PLACEHOLDER
+    x: 'https://x.com/GuyZ3RO',                          // PLACEHOLDER
     instagram: 'https://instagram.com/oneraidstudio',          // PLACEHOLDER
     mcmodels: 'https://mcmodels.net/',                         // PLACEHOLDER
     builtbybit: 'https://builtbybit.com/',                     // PLACEHOLDER
-    sketchfab: 'https://sketchfab.com/',                       // PLACEHOLDER
+    sketchfab: 'https://sketchfab.com/oneraidstudio',                       // PLACEHOLDER
 
     /* the external "full portfolio" destination */
-    'portfolio-external': 'https://sketchfab.com/',            // PLACEHOLDER
+    'portfolio-external': 'https://sketchfab.com/oneraidstudio',            // PLACEHOLDER
 
     /* pack listings — "View on MCModels" / "Get it free" */
     'pack-iconz': 'https://mcmodels.net/',                     // PLACEHOLDER
