@@ -162,7 +162,10 @@
 
   <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer__head">
-      <span class="brand__word" translate="no">O.R.S</span>
+      <a class="brand" href="index.html" aria-label="One Raid Studio &mdash; home">
+        <img src="assets/ors_16x16_sword_b.png" alt="" width="16" height="16">
+        <span class="brand__word" translate="no">O.R.S</span>
+      </a>
       <button class="drawer__close" type="button" data-drawer-close aria-label="Close menu">&#10005;</button>
     </div>
     <nav class="drawer__nav" aria-label="Mobile">
@@ -202,7 +205,7 @@
             </div>
           </div>
           <div class="svc__body">
-            <p class="svc__text">Custom Blockbench models for Minecraft and Hytale — cosmetics, weapons, mobs, props, furniture, and whatever you can dream up.</p>
+            <p class="svc__text">Describe it, get a reference. We&rsquo;ll bring it to life with cubes.</p>
             <ul class="pills" aria-label="Modeling deliverables">
               <li class="pill">Cosmetics</li>
               <li class="pill">Weapons</li>
@@ -227,7 +230,7 @@
             </div>
           </div>
           <div class="svc__body">
-            <p class="svc__text">Pixel art for every surface — GUIs and HUDs, item textures, rank icons, banners, and server icons. We&rsquo;ve shipped full texture packs too.</p>
+            <p class="svc__text">Artworks tailored for your server that stands out and tells your story.</p>
             <ul class="pills" aria-label="Texturing deliverables">
               <li class="pill">GUIs &amp; HUDs</li>
               <li class="pill">2D Items</li>
@@ -251,7 +254,7 @@
             </div>
           </div>
           <div class="svc__body">
-            <p class="svc__text">Plugins and automation that handle the mundane — Minecraft and Hytale plugins, Discord bots, server tools, and workflow automation.</p>
+            <p class="svc__text">The systems and pipelines behind the scenes that you can rely on.</p>
             <ul class="pills" aria-label="Development deliverables">
               <li class="pill">MC / Hytale plugins</li>
               <li class="pill">Discord bots</li>
@@ -272,7 +275,8 @@
          the marker  SET-PRICE  so you can grep for them. Replace all five
          before this page goes live — a wrong price costs more than no price.
          Same goes for the "24 hours" reply promise and the "two rounds" of
-         revisions in the process section underneath.
+         revisions in the process section underneath — both are commitments,
+         so make sure you can keep them before this page ships.
          =================================================================== -->
     <section class="sec sec--rule" id="pricing" aria-labelledby="pricing-title">
       <div class="wrap">
@@ -282,7 +286,7 @@
             <span class="script" aria-hidden="true" style="--tilt:-5deg">Rates</span>
           </div>
           <h2 class="h2 tone-ice" id="pricing-title">Starting prices</h2>
-          <p class="lede">Honest numbers so you know where you stand before you message us. Every job still gets quoted on its own scope — these are floors, not finals.</p>
+          <p class="lede">Honest floors, not finals &mdash; every job is still quoted on its own scope.</p>
         </div>
 
         <ul class="price reveal" aria-label="Starting prices by service">
@@ -290,35 +294,35 @@
             <span class="tag tag--cyan">Icons &amp; emojis</span>
             <p class="price__amt"><small>from</small> <b>$2</b></p><!-- SET-PRICE -->
             <span class="price__unit">per set</span>
-            <p class="price__text">Server icons, chat emojis and rank badges. Recolors of an existing pack sit here too.</p>
+            <p class="price__text">Recolors of a pack you already own land here too.</p>
           </li>
           <li class="price__card">
             <span class="tag tag--cyan">Pixel art &amp; GUI</span>
             <p class="price__amt"><small>from</small> <b>$10</b></p><!-- SET-PRICE -->
             <span class="price__unit">per screen</span>
-            <p class="price__text">Chest menus, shop screens, quest logs, HUDs and item textures, drawn at native resolution.</p>
+            <p class="price__text">Drawn at native resolution, never upscaled.</p>
           </li>
           <li class="price__card">
             <span class="tag tag--cyan">3D models</span>
             <p class="price__amt"><small>from</small> <b>$20</b></p><!-- SET-PRICE -->
             <span class="price__unit">per model</span>
-            <p class="price__text">Cosmetics, weapons, props, furniture and mobs in Blockbench. Can be rigged and animated if needed.</p>
+            <p class="price__text">Rigged and animated on request.</p>
           </li>
           <li class="price__card">
             <span class="tag tag--cyan">Plugins &amp; automation</span>
             <p class="price__amt"><small>from</small> <b>$50</b></p><!-- SET-PRICE -->
             <span class="price__unit">per build</span>
-            <p class="price__text">Custom systems, commands, Discord bots and server tools, delivered with proper documentation.</p>
+            <p class="price__text">Ships with a documented config.</p>
           </li>
           <li class="price__card price__card--lead">
             <span class="tag">Full server package</span>
             <p class="price__amt"><small>from</small> <b>$250</b></p><!-- SET-PRICE -->
             <span class="price__unit">one brief</span>
-            <p class="price__text">Models, pixel art and the plugin that ties them together — one team, one timeline, one invoice.</p>
+            <p class="price__text">One team, one timeline, one invoice.</p>
           </li>
         </ul>
 
-        <p class="price__note">Prices are in USD. You get a fixed quote before any work starts — no hourly billing and no surprise invoices. Bulk sets and repeat work are priced better than the figures above.</p>
+        <p class="price__note">USD. Fixed quote before any work starts &mdash; no hourly billing, no surprise invoices. Bulk sets and repeat work are priced better than the figures above.</p>
       </div>
     </section>
 
@@ -334,33 +338,56 @@
           <p class="promise"><i aria-hidden="true"></i>We reply within 24 hours &mdash; usually much sooner</p>
         </div>
 
-        <ol class="proc reveal">
-          <li class="proc__step">
-            <span class="proc__num" aria-hidden="true">01</span>
-            <h3 class="proc__title">Brief</h3>
-            <p class="proc__text">Open a ticket in our Discord and tell us what you need. References, screenshots or your current resource pack all help &mdash; the more we can see, the tighter the quote.</p>
-          </li>
-          <li class="proc__step">
-            <span class="proc__num" aria-hidden="true">02</span>
-            <h3 class="proc__title">Quote &amp; timeline</h3>
-            <p class="proc__text">You get a fixed price and a delivery window in writing before anything is built. If the scope changes later, the quote changes first followed by the deadline.</p>
-          </li>
-          <li class="proc__step">
-            <span class="proc__num" aria-hidden="true">03</span>
-            <h3 class="proc__title">Work in Progress</h3>
-            <p class="proc__text">Updates no matter how small, lands in your ticket as it happens, so you steer it early rather than reacting to one big drop at the end.</p>
-          </li>
-          <li class="proc__step">
-            <span class="proc__num" aria-hidden="true">04</span>
-            <h3 class="proc__title">Revisions</h3>
-            <p class="proc__text">Two rounds of changes are included. Recolors and Minor changes are free; a major change of shape or scope will be charged.</p>
-          </li>
-          <li class="proc__step">
-            <span class="proc__num" aria-hidden="true">05</span>
-            <h3 class="proc__title">Handover</h3>
-            <p class="proc__text">Final files in the formats your setup actually uses &mdash; source models, texture sheets, resource pack, plugin jar and config &mdash; plus a walkthrough of how to drop them in.</p>
-          </li>
-        </ol>
+        <!-- The rail is decorative. On pointer devices hovering a card fills
+             .proc__rail up to that checkpoint, in CSS. On touch screens there
+             is no hover, so main.js marks each step as it scrolls into view.
+             Below 900px the rail becomes a vertical timeline and each step
+             draws its own segment instead. -->
+        <div class="proc-wrap">
+          <ol class="proc reveal">
+            <li class="proc__item">
+              <div class="proc__step">
+                <span class="proc__num" aria-hidden="true">01</span>
+                <h3 class="proc__title">Brief</h3>
+                <p class="proc__text">Open a ticket in our Discord &mdash; the more references you send, the tighter the quote.</p>
+              </div>
+              <span class="proc__mark" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="proc__item">
+              <div class="proc__step">
+                <span class="proc__num" aria-hidden="true">02</span>
+                <h3 class="proc__title">Quote &amp; timeline</h3>
+                <p class="proc__text">A fixed price and a delivery window in writing, before anything is built.</p>
+              </div>
+              <span class="proc__mark" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="proc__item">
+              <div class="proc__step">
+                <span class="proc__num" aria-hidden="true">03</span>
+                <h3 class="proc__title">Work in Progress</h3>
+                <p class="proc__text">Every update lands in your ticket as it happens, so you steer it early.</p>
+              </div>
+              <span class="proc__mark" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="proc__item">
+              <div class="proc__step">
+                <span class="proc__num" aria-hidden="true">04</span>
+                <h3 class="proc__title">Revisions</h3>
+                <p class="proc__text">Two rounds included. Recolors and minor changes are free.</p>
+              </div>
+              <span class="proc__mark" aria-hidden="true"><i></i></span>
+            </li>
+            <li class="proc__item">
+              <div class="proc__step">
+                <span class="proc__num" aria-hidden="true">05</span>
+                <h3 class="proc__title">Handover</h3>
+                <p class="proc__text">Source files, resource pack, jar and config &mdash; plus a walkthrough.</p>
+              </div>
+              <span class="proc__mark" aria-hidden="true"><i></i></span>
+            </li>
+          </ol>
+          <span class="proc__rail" aria-hidden="true"><i></i></span>
+        </div>
       </div>
     </section>
 

@@ -21,7 +21,7 @@
 .svc__rail{display:flex;flex-direction:column;gap:var(--sp-4);min-width:0}
 .svc__meta{display:flex;flex-direction:column;gap:10px}
 .svc__meta .tag{align-self:flex-start}
-.svc__title{font-family:var(--pixel);font-weight:600;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;color:var(--text)}
+.svc__title{font-family:var(--title);font-weight:600;font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;color:var(--text)}
 .svc__body{display:flex;flex-direction:column;gap:var(--sp-4);min-width:0}
 .svc__text{max-width:62ch;font-size:var(--fs-body);line-height:var(--lh-body);color:var(--text-muted)}
 
@@ -61,7 +61,18 @@
   text-transform:uppercase;color:var(--text-dim);
 }
 .price__card--lead .price__amt small{color:rgba(255,255,255,.78)}
-.price__amt b{font-family:var(--pixel);font-weight:600;font-size:1.9rem;line-height:1}
+/* Section-title face, not the body one: same 1.9rem as always. Lime so the
+   number is the first thing the eye lands on. */
+.price__amt b{
+  font-family:var(--title);font-weight:700;font-size:1.9rem;line-height:1;
+  color:var(--neon-lime);text-shadow:0 0 18px var(--glow-lime);
+  font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+}
+/* Lime on the red lead card reads muddy — the two are too close in value.
+   White separates cleanly and still carries the most weight in the row. */
+.price__card--lead .price__amt b{
+  color:var(--white);text-shadow:0 0 16px rgba(254,254,254,.32);
+}
 .price__unit{
   font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.1em;
   text-transform:uppercase;color:var(--text-dim);
@@ -73,14 +84,35 @@
 }
 
 /* --------------------------------------------------------------- PROCESS
-   Numbered steps. The number is a watermark behind its own step rather than a
-   badge beside the title, so five columns stay readable at 200px each.     */
+   Five steps with a progress rail. Two different mechanisms, because the two
+   layouts want different things:
+
+   WIDE (> 900px) — one single rail element spanning checkpoint 1 to 5, whose
+   fill width is driven by which card is hovered. It has to be one element:
+   with a segment per card, hovering step 4 grew three separate lines at once,
+   which read as three lines rather than one travelling to step 4.
+
+   STACKED (<= 900px) — the rail turns vertical and fills per step as you
+   scroll (no hover on touch), so per-item segments are right there. Each one
+   runs from its own checkpoint to the next, and they abut exactly.
+
+   Grid is pinned to exactly 5 columns above the breakpoint: the single rail's
+   geometry is derived from the column count, so auto-fit would break it. Add
+   a sixth step and the nth-child rules below need extending too.          */
+.proc-wrap{position:relative}
 .proc{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:var(--sp-4);list-style:none;margin:0;padding:0;counter-reset:none;
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:var(--sp-4);list-style:none;margin:0;padding:0;
+}
+.proc__item{
+  --fill:0;
+  --dot:var(--border);
+  --dot-in:var(--surface-2);
+  --dot-glow:none;
+  display:flex;flex-direction:column;min-width:0;
 }
 .proc__step{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;flex:1;
   display:flex;flex-direction:column;gap:10px;
   padding:var(--sp-5) var(--sp-4);
   background:var(--surface);border:2px solid var(--border);box-shadow:var(--sh-1);
@@ -95,11 +127,110 @@
 }
 .proc__title{
   position:relative;
-  font-family:var(--pixel);font-weight:600;font-size:1.15rem;line-height:1.15;color:var(--text);
+  font-family:var(--title);font-weight:600;font-size:1.15rem;line-height:1.15;color:var(--text);
 }
 .proc__text{position:relative;font-size:var(--fs-sm);line-height:1.55;color:var(--text-muted)}
 
+/* ---- the checkpoints. Each item carries one; the marks reserve the 16px
+   strip under the cards that the rail runs through.                       */
+.proc__mark{position:relative;flex:0 0 auto;height:16px;margin-top:14px}
+.proc__mark::after{
+  content:"";position:absolute;top:50%;left:50%;z-index:1;
+  width:12px;height:12px;transform:translate(-50%,-50%);
+  background:var(--dot-in);border:2px solid var(--dot);box-shadow:var(--dot-glow);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+             box-shadow var(--dur) var(--ease);
+}
+/* per-item segments are the stacked layout's business only */
+.proc__mark::before{content:"";display:none}
+.proc__mark i{display:none}
+
+/* ---- the single wide-screen rail. It spans dot 1 to dot 5, so it insets by
+   half a column on each side: with 5 columns and 4 gaps in a container of
+   width T, one column is (T - 4G)/5 and half of that is (T - 4G)/10.      */
+.proc__rail{
+  --fill:0;
+  position:absolute;z-index:0;pointer-events:none;
+  bottom:8px;height:2px;
+  left:calc((100% - 4 * var(--sp-4)) / 10);
+  right:calc((100% - 4 * var(--sp-4)) / 10);
+  background:var(--rule);
+}
+.proc__rail i{
+  position:absolute;top:0;bottom:0;left:0;
+  width:calc(var(--fill) * 100%);
+  background:var(--neon-red);box-shadow:0 0 10px var(--glow-red);
+  transition:width var(--dur) var(--ease);
+}
+
+/* ---- hover. Dots light up to and including the hovered card; CSS can select
+   later siblings but not earlier ones, so the logic runs backwards. The rail
+   fill is set on the wrapper instead, one stop per card.                  */
+@media (hover:hover){
+  .proc:has(.proc__step:hover) .proc__item{
+    --fill:1;--dot:var(--neon-red);--dot-in:var(--neon-red);--dot-glow:0 0 12px var(--glow-red);
+  }
+  .proc:has(.proc__step:hover) .proc__item:has(.proc__step:hover){--fill:0}
+  .proc:has(.proc__step:hover) .proc__item:has(.proc__step:hover) ~ .proc__item{
+    --fill:0;--dot:var(--border);--dot-in:var(--surface-2);--dot-glow:none;
+  }
+
+  .proc-wrap:has(.proc__item:nth-child(2) .proc__step:hover) .proc__rail{--fill:.25}
+  .proc-wrap:has(.proc__item:nth-child(3) .proc__step:hover) .proc__rail{--fill:.5}
+  .proc-wrap:has(.proc__item:nth-child(4) .proc__step:hover) .proc__rail{--fill:.75}
+  .proc-wrap:has(.proc__item:nth-child(5) .proc__step:hover) .proc__rail{--fill:1}
+}
+
+/* ---- touch screens have no hover, so the rail advances as you scroll past.
+   main.js adds .is-reached and never removes it, so the last rule that
+   matches wins and the fill only ever moves forward.                      */
+@media (hover:none){
+  .proc__item.is-reached{
+    --fill:1;--dot:var(--neon-red);--dot-in:var(--neon-red);--dot-glow:0 0 12px var(--glow-red);
+  }
+  .proc-wrap:has(.proc__item:nth-child(2).is-reached) .proc__rail{--fill:.25}
+  .proc-wrap:has(.proc__item:nth-child(3).is-reached) .proc__rail{--fill:.5}
+  .proc-wrap:has(.proc__item:nth-child(4).is-reached) .proc__rail{--fill:.75}
+  .proc-wrap:has(.proc__item:nth-child(5).is-reached) .proc__rail{--fill:1}
+}
+
 @media (max-width:560px){
-  .price,.proc{grid-template-columns:1fr}
+  .price{grid-template-columns:1fr}
+}
+
+@media (max-width:900px){
   .proc__num{font-size:2rem}
+
+  /* stacked: vertical timeline down the left edge. --dot-y is the distance
+     from a card's top edge to its checkpoint: 2px border + the card's top
+     padding + half a title line, which lands the dot on the title rather
+     than floating between the card top and the text.                       */
+  .proc{grid-template-columns:1fr;gap:0}
+  .proc__rail{display:none}
+  .proc__item{
+    --dot-y:calc(2px + var(--sp-5) + .66rem);
+    display:grid;grid-template-columns:26px minmax(0,1fr);
+    column-gap:var(--sp-4);align-items:stretch;
+  }
+  .proc__mark{grid-column:1;grid-row:1;width:26px;height:auto;margin-top:0}
+  .proc__step{grid-column:2;grid-row:1;margin-bottom:var(--sp-4)}
+  .proc__item:last-child .proc__step{margin-bottom:0}
+
+  /* each segment leaves its own dot and reaches the next card's */
+  .proc__mark::before,
+  .proc__mark i{
+    display:block;position:absolute;
+    top:var(--dot-y);bottom:calc(var(--dot-y) * -1);
+    left:50%;width:2px;
+    transform:translateX(-50%);
+  }
+  .proc__mark::before{background:var(--rule)}
+  .proc__mark i{
+    background:var(--neon-red);box-shadow:0 0 10px var(--glow-red);
+    transform:translateX(-50%) scaleY(var(--fill));transform-origin:center top;
+    transition:transform var(--dur) var(--ease);
+  }
+  .proc__item:last-child .proc__mark::before,
+  .proc__item:last-child .proc__mark i{display:none}
+  .proc__mark::after{top:var(--dot-y)}
 }

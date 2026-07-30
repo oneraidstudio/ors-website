@@ -30,6 +30,7 @@
   --neon-red:#FF2E4D;
   --neon-cyan:#00E5FF;
   --neon-magenta:#FF2D95;
+  --neon-lime:#B6FF3B;       /* prices only — 15.9:1 on --surface, 11.3:1 on --brand-red-deep */
   --white:#FEFEFE;
 
   /* text — every value below clears 4.5:1 on --bg and --surface */
@@ -40,11 +41,23 @@
   --teal-deep:#0D4F59;       /* the cyan counterpart to --maroon           */
   --glow-red:rgba(255,46,77,.62);
   --glow-cyan:rgba(0,229,255,.5);
+  --glow-lime:rgba(182,255,59,.45);
   --chrome:linear-gradient(180deg,#FFFFFF 0%,#E7ECF4 22%,#AAB4C6 50%,#6E7488 68%,#EAB8C6 88%,#00E5FF 100%);
 
   /* type families */
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  /* Kept as the fallback inside --title and nothing else. A webfont is only
+     downloaded when something actually renders in it, so while Wellbutrin
+     loads this costs a few bytes of stylesheet and no request.            */
   --pixel:'Pixelify Sans',var(--mono);
+  /* THE display face — every heading, title, nav link, wordmark and price on
+     the site resolves through here. Wellbutrin is self-hosted (@font-face
+     below); if the file is missing the chain falls straight back to Pixelify
+     Sans, so nothing breaks and nothing shifts layout badly.
+
+     To revert the whole site to the old look, change this one line to:
+         --title:var(--pixel);                                             */
+  --title:'Wellbutrin',var(--pixel);
   --arcade:'Press Start 2P',var(--mono);
   --bitmap:'Silkscreen',var(--mono);
   --script:'Pirata One',Georgia,serif;
@@ -121,6 +134,25 @@ img,svg{max-width:100%;display:block}
 h1,h2,h3,h4,p{margin:0;text-wrap:pretty}
 h1,h2,h3{text-wrap:balance}
 ul{margin:0;padding:0;list-style:none}
+
+/* --------------------------------------------------------------- WEBFONT
+   Wellbutrin — Karen Clemens & Apostrophic Labs, 2000. Freeware, cleared for
+   commercial use. Self-hosted because it is not on Google Fonts.
+
+   Drop the file in as  assets/fonts/wellbutrin.ttf  (the .woff2 line is there
+   if you convert it later — smaller, but the .ttf alone works everywhere).
+
+   The weight RANGE is deliberate: the family ships one weight, so declaring
+   400-700 tells the browser this face covers all of them and stops it faking
+   a bold. Synthetic bold on a rounded-rectangle face looks like a smudge.  */
+@font-face{
+  font-family:'Wellbutrin';
+  src:url('../assets/fonts/wellbutrin.woff2') format('woff2'),
+      url('../assets/fonts/wellbutrin.ttf') format('truetype');
+  font-weight:400 700;
+  font-style:normal;
+  font-display:swap;
+}
 
 a{color:var(--neon-cyan);text-decoration:none}
 a:hover{color:var(--white)}
@@ -322,17 +354,26 @@ html{scrollbar-color:var(--brand-red-lit) var(--surface);scrollbar-width:auto}
 .burger i:last-child{background:var(--neon-cyan)}
 
 /* ------------------------------------------------------------ 8 DRAWER */
+/* The drawer replaces the header row on screen, so its first row has to land
+   in exactly the same place. That means the page gutter (16px on a phone), not
+   the drawer's own 24px pad, and the header's 14px top pad — otherwise O.R.S
+   and the close button both sit low and inboard of the brand and burger they
+   are standing in for. Vertical alignment then follows for free: both rows are
+   one --tap-tall control inside a 14px pad. */
 .drawer{
   position:fixed;inset:0;z-index:9500;
   display:none;flex-direction:column;
   background:var(--bg);
-  padding:var(--sp-5);
-  padding-top:max(var(--sp-5),env(safe-area-inset-top));
+  padding-inline:max(var(--gutter),env(safe-area-inset-left),env(safe-area-inset-right));
+  padding-top:max(14px,env(safe-area-inset-top));
   padding-bottom:max(var(--sp-5),env(safe-area-inset-bottom));
   overflow-y:auto;overscroll-behavior:contain;
 }
 .drawer.is-open{display:flex}
-.drawer__head{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4)}
+.drawer__head{
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
+  min-height:var(--tap);
+}
 .drawer__close{
   width:var(--tap);height:var(--tap);flex-shrink:0;
   background:var(--surface-2);border:2px solid var(--border);box-shadow:var(--sh-1);
@@ -343,7 +384,7 @@ html{scrollbar-color:var(--brand-red-lit) var(--surface);scrollbar-width:auto}
 .drawer__link{
   display:flex;align-items:center;min-height:var(--tap);
   padding:16px 4px;
-  font-family:var(--pixel);font-size:clamp(1.5rem,6vw,2rem);
+  font-family:var(--title);font-size:clamp(1.5rem,6vw,2rem);
   color:var(--text);border-bottom:2px solid var(--rule);
 }
 .drawer__link:hover,.drawer__link[aria-current="page"]{color:var(--neon-red)}
@@ -378,9 +419,9 @@ body.is-locked{overflow:hidden}
 .sec-head__row{display:flex;align-items:baseline;gap:var(--sp-4);flex-wrap:wrap}
 .sec-head .lede,.page-head .lede{margin-top:var(--sp-1)}
 
-.h1{font-family:var(--pixel);font-weight:600;font-size:var(--fs-h1);line-height:var(--lh-head)}
-.h2{font-family:var(--pixel);font-weight:600;font-size:var(--fs-h2);line-height:var(--lh-head)}
-.h3{font-family:var(--pixel);font-weight:500;font-size:var(--fs-h3);line-height:1.2;color:var(--text)}
+.h1{font-family:var(--title);font-weight:600;font-size:var(--fs-h1);line-height:var(--lh-head)}
+.h2{font-family:var(--title);font-weight:600;font-size:var(--fs-h2);line-height:var(--lh-head)}
+.h3{font-family:var(--title);font-weight:500;font-size:var(--fs-h3);line-height:1.2;color:var(--text)}
 
 /* Two heading tones, identical treatment — solid neon fill, hard offset
    shadow, soft halo. .tone-ice is the cyan counterpart to .tone-red. */
@@ -474,7 +515,7 @@ body.is-locked{overflow:hidden}
 .card:hover{transform:translate(-2px,-2px);box-shadow:var(--sh-3);border-color:var(--brand-red)}
 .card__media{border-bottom:2px solid var(--border)}
 .card__body{padding:var(--sp-5);display:flex;flex-direction:column;gap:var(--sp-3);flex:1}
-.card__title{font-family:var(--pixel);font-weight:500;font-size:var(--fs-h3);line-height:1.15;color:var(--text)}
+.card__title{font-family:var(--title);font-weight:500;font-size:var(--fs-h3);line-height:1.15;color:var(--text)}
 .card__text{font-size:var(--fs-sm);line-height:1.55;color:var(--text-muted)}
 
 .tags{display:flex;flex-wrap:wrap;gap:var(--sp-2)}
@@ -582,7 +623,7 @@ body.is-locked{overflow:hidden}
 .footer__grid{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,1fr));gap:var(--sp-7) var(--sp-7)}
 .footer__brand{display:flex;flex-direction:column;gap:10px}
 .footer__word{
-  font-family:var(--pixel);font-weight:700;font-size:1.25rem;
+  font-family:var(--title);font-weight:700;font-size:1.25rem;
   color:var(--neon-cyan);
   text-shadow:2px 2px 0 var(--teal-deep),0 0 20px var(--glow-cyan);
 }

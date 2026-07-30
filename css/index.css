@@ -145,7 +145,7 @@
 .bigbtn:active{transform:translate(2px,2px);box-shadow:var(--sh-1)}
 .bigbtn--primary{background:var(--brand-red-lit);border-color:var(--neon-red);color:var(--white);box-shadow:var(--sh-2),var(--glow-sm)}
 .bigbtn--primary:hover{background:var(--neon-red);border-color:var(--neon-red);color:var(--white);box-shadow:var(--sh-3),var(--glow-md)}
-.bigbtn b{font-family:var(--pixel);font-weight:600;font-size:1.3rem;line-height:1.1}
+.bigbtn b{font-family:var(--title);font-weight:600;font-size:1.3rem;line-height:1.1}
 .bigbtn small{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted)}
 .bigbtn--primary small{color:rgba(255,255,255,.88)}
 
