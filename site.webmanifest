@@ -1,7 +1,7 @@
 {
   "name": "One Raid Studio",
   "short_name": "O.R.S",
-  "description": "Custom 3D models, pixel art, and plugins for Minecraft and Hytale servers.",
+  "description": "Custom 3D models, pixel art, and plugins for Minecraft servers.",
   "start_url": "/",
   "scope": "/",
   "display": "browser",
