@@ -93,8 +93,9 @@
 .shot:hover .shot__zoom,
 .shot__btn:focus-visible ~ .shot__zoom{opacity:1;transform:none}
 
-/* Every tile is a studio sample, not a named client commission. The flag says
-   so on the tile itself so the claim is never implied by omission. */
+/* Only a tile that needs qualifying carries a flag — an unbuilt slot reads
+   "Coming soon" on the tile itself, so a placeholder is never mistaken for
+   finished work. Real pieces carry no flag at all. */
 .shot__flag{
   position:absolute;left:8px;top:8px;z-index:1;pointer-events:none;
   font-family:var(--mono);font-weight:700;font-size:.58rem;letter-spacing:.14em;

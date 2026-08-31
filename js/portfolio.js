@@ -103,6 +103,7 @@
   var lbDesc = box.querySelector('[data-lb-desc]');
   var lbCat = box.querySelector('[data-lb-cat]');
   var lbCounter = box.querySelector('[data-lb-counter]');
+  var lbFlag = box.querySelector('[data-lb-flag]');
   var lbClose = box.querySelector('.lightbox__close');
   var lbPrev = box.querySelector('.lightbox__nav--prev');
   var lbNext = box.querySelector('.lightbox__nav--next');
@@ -145,6 +146,13 @@
     var descEl = shot.querySelector('.shot__desc');
     lbDesc.textContent = descEl ? descEl.textContent.trim() : '';
     lbCat.textContent = LABELS[shot.getAttribute('data-cat')] || '';
+    // A tile only carries a .shot__flag when it needs qualifying ("Coming
+    // soon"). Finished work carries none, so the badge falls back to the
+    // studio name rather than labelling real pieces as something they aren't.
+    if (lbFlag) {
+      var flagEl = shot.querySelector('.shot__flag');
+      lbFlag.textContent = flagEl ? flagEl.textContent.trim() : 'One Raid Studio';
+    }
     lbCounter.textContent = (index + 1) + ' / ' + list.length;
   }
 

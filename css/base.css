@@ -525,6 +525,7 @@ body.is-locked{overflow:hidden}
 }
 .tag--cyan{color:var(--neon-cyan);border-color:var(--neon-cyan)}
 .tag--free{color:var(--neon-magenta);border-color:var(--neon-magenta);font-weight:700}
+.tag--soon{color:var(--neon-red);border-color:var(--neon-red);font-weight:700}
 
 .pills{display:flex;flex-wrap:wrap;gap:10px}
 .pill{

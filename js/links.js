@@ -56,8 +56,7 @@
 
     /* pack listings — "View on MCModels" / "Get it free" */
     'pack-iconz': 'https://mcmodels.net/',                     // PLACEHOLDER
-    'pack-meme': 'https://mcmodels.net/',                      // PLACEHOLDER
-    'pack-hamster': 'https://mcmodels.net/'                    // PLACEHOLDER
+    'pack-claim': 'https://mcmodels.net/'                      // PLACEHOLDER
   };
 
   var anchors = document.querySelectorAll('[data-link]');
