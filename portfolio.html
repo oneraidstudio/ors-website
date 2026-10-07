@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Portfolio — One Raid Studio</title>
-  <meta name="description" content="Work by One Raid Studio — the All Your Iconz and Claim Iconz packs, commissioned model retextures, in-house Blockbench tools, and websites.">
+  <meta name="description" content="Minecraft models, mobs, weapons, animations, pixel art, rank badges and banners, plus apps, plugins and websites by One Raid Studio.">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#0B0410">
   <link rel="canonical" href="https://oneraidstudio.com/portfolio.html">
@@ -13,7 +13,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://oneraidstudio.com/portfolio.html">
   <meta property="og:title" content="Portfolio — One Raid Studio">
-  <meta property="og:description" content="Work by One Raid Studio — the All Your Iconz and Claim Iconz packs, commissioned model retextures, in-house Blockbench tools, and websites.">
+  <meta property="og:description" content="Minecraft models, mobs, weapons, animations, pixel art, rank badges and banners, plus apps, plugins and websites by One Raid Studio.">
   <meta property="og:image" content="https://oneraidstudio.com/assets/ors_1024x1024.png">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="1024">
@@ -91,7 +91,7 @@
         "@id": "https://oneraidstudio.com/portfolio.html#page",
         "name": "Portfolio — One Raid Studio",
         "url": "https://oneraidstudio.com/portfolio.html",
-        "description": "The All Your Iconz and Claim Iconz packs, commissioned model retextures, in-house Blockbench tools, and websites built by One Raid Studio.",
+        "description": "Minecraft models, mobs, weapons, animations, pixel art, rank badges and banners, plus apps, plugins and websites by One Raid Studio.",
         "isPartOf": { "@id": "https://oneraidstudio.com/#website" },
         "publisher": { "@id": "https://oneraidstudio.com/#org" }
       }
@@ -159,27 +159,37 @@
           <span class="script" aria-hidden="true" style="--tilt:-8deg">Get Amazed!</span>
         </div>
         <h1 class="h1 tone-ice">New studio. Years of experience.</h1>
-        <p class="lede">Real work from the studio &mdash; pack art that ships on MCModels, pieces built for clients, the tools we run in-house, and sites we&rsquo;ve made. Want something like one of these for your own server? That&rsquo;s a commission.</p>
+        <p class="lede">Real work from the studio &mdash; custom models, mobs, weapons and animations, pixel art, rank badges and banners, the tools we run in-house, and sites we&rsquo;ve made. Want something like one of these for your own server? That&rsquo;s a commission.</p>
       </div>
     </section>
 
     <section class="gallery-wrap">
       <div class="wrap">
         <div class="filters" role="group" aria-label="Filter work by type">
+          <span class="eyebrow">Type</span>
           <button class="filter is-on" type="button" data-filter="all" aria-pressed="true" aria-controls="gallery">All work</button>
-          <button class="filter" type="button" data-filter="models" aria-pressed="false" aria-controls="gallery">Models</button>
+          <button class="filter" type="button" data-filter="models" aria-pressed="false" aria-controls="gallery">3D models</button>
+          <button class="filter" type="button" data-filter="animations" aria-pressed="false" aria-controls="gallery">Animations</button>
           <button class="filter" type="button" data-filter="pixel" aria-pressed="false" aria-controls="gallery">Pixel art</button>
           <button class="filter" type="button" data-filter="plugins" aria-pressed="false" aria-controls="gallery">Plugins</button>
           <button class="filter" type="button" data-filter="apps" aria-pressed="false" aria-controls="gallery">Apps</button>
           <button class="filter" type="button" data-filter="websites" aria-pressed="false" aria-controls="gallery">Websites</button>
-          <p class="filters__count" role="status" aria-live="polite" data-filter-count></p>
         </div>
+        <div class="filters" role="group" aria-label="Filter work by subject">
+          <span class="eyebrow">Subject</span>
+          <button class="filter" type="button" data-filter="props" aria-pressed="false" aria-controls="gallery">Items &amp; props</button>
+          <button class="filter" type="button" data-filter="mobs" aria-pressed="false" aria-controls="gallery">Mobs &amp; NPCs</button>
+          <button class="filter" type="button" data-filter="weapons" aria-pressed="false" aria-controls="gallery">Weapons</button>
+          <button class="filter" type="button" data-filter="ranks" aria-pressed="false" aria-controls="gallery">Ranks &amp; badges</button>
+          <button class="filter" type="button" data-filter="banners" aria-pressed="false" aria-controls="gallery">Banners</button>
+        </div>
+        <p class="filters__count" role="status" aria-live="polite" data-filter-count></p>
 
         <!-- Card sizes: add data-span="COLUMNSxROWS" to any figure below.
              1x1 (default, square) · 2x1 wide · 1x2 tall · 2x2 big · up to 3
              on either axis. Spans clamp down on their own on smaller screens. -->
         <div class="gallery" id="gallery" data-filter="all">
-          <figure class="shot" data-cat="models" data-span="2x2">
+          <figure class="shot" data-cat="models" data-tags="props" data-span="2x2">
             <button class="shot__btn frame" type="button"
                     data-label="All Your Iconz &mdash; 3D models &middot; preview"
                     data-title="All Your Iconz &mdash; 3D models">
@@ -199,7 +209,7 @@
             <p class="shot__desc vh">Every pixel was placed by hand and every color picked manually, without relying on any external palette.</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
-          <figure class="shot" data-cat="models">
+          <figure class="shot" data-cat="models" data-tags="props">
             <button class="shot__btn frame" type="button"
                     data-label="Claim Iconz &mdash; 3D models &middot; preview"
                     data-title="Claim Iconz &mdash; 3D models">
@@ -209,17 +219,7 @@
             <p class="shot__desc vh">30 claim-related icons, so server owners have everything to do with claiming, territory, factions, towny and the rest at their disposal. Each icon is easy to understand and remember, for quick navigation.</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
-          <figure class="shot" data-cat="apps" data-span="2x1">
-            <button class="shot__btn frame" type="button"
-                    data-label="Golem &mdash; Geometry Apprentice &middot; preview"
-                    data-title="Golem &mdash; Geometry Apprentice">
-              <img data-slot src="assets/portfolio/7_golem.png" alt="Golem desktop app showing a Blockbench model library with tags and a live 3D preview &mdash; One Raid Studio" width="1918" height="1029" loading="lazy" decoding="async">
-            </button>
-            <figcaption>Golem &mdash; Geometry Apprentice</figcaption>
-            <p class="shot__desc vh">A secret ongoing project of the studio, for experimentation with 3D models and AI.</p>
-            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
-          </figure>
-          <figure class="shot" data-cat="models">
+          <figure class="shot" data-cat="models" data-tags="mobs">
             <button class="shot__btn frame" type="button"
                     data-label="Spawn egg model set &middot; preview"
                     data-title="Spawn egg model set">
@@ -229,17 +229,7 @@
             <p class="shot__desc vh">Vanilla eggs created from scratch, matching the vanilla 2D mob egg icons exactly.</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
-          <figure class="shot" data-cat="apps" data-span="2x1">
-            <button class="shot__btn frame" type="button"
-                    data-label="ORS Hub &middot; preview"
-                    data-title="ORS Hub">
-              <img data-slot src="assets/portfolio/8_orshub.png" alt="ORS Hub desktop app showing a searchable grid of twelve internal studio tools &mdash; One Raid Studio" width="2143" height="1342" loading="lazy" decoding="async">
-            </button>
-            <figcaption>ORS Hub</figcaption>
-            <p class="shot__desc vh">The studio&rsquo;s internal tool launcher. We have a wide range of tools at our disposal that make our lives easier.</p>
-            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
-          </figure>
-          <figure class="shot" data-cat="models">
+          <figure class="shot" data-cat="models" data-tags="mobs">
             <button class="shot__btn frame" type="button"
                     data-label="Retexture &mdash; Dialga &middot; preview"
                     data-title="Retexture &mdash; Dialga">
@@ -249,17 +239,7 @@
             <p class="shot__desc vh">Galaxy-theme retexture of the Pok&eacute;mon &lsquo;Dialga&rsquo;, for a commission. The first pair shows the regular galaxy theme, the second the shiny galaxy theme.</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
-          <figure class="shot" data-cat="websites" data-span="2x1">
-            <button class="shot__btn frame" type="button"
-                    data-label="GuyZ3RO &mdash; personal site &middot; preview"
-                    data-title="GuyZ3RO &mdash; personal site">
-              <img data-slot src="assets/portfolio/9_guyzero_website.png" alt="GuyZ3RO developer portfolio website homepage &mdash; One Raid Studio" width="1884" height="904" loading="lazy" decoding="async">
-            </button>
-            <figcaption>GuyZ3RO &mdash; personal site</figcaption>
-            <p class="shot__desc vh">Of course we made our own websites!</p>
-            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
-          </figure>
-          <figure class="shot" data-cat="models">
+          <figure class="shot" data-cat="models" data-tags="mobs">
             <button class="shot__btn frame" type="button"
                     data-label="Retexture &mdash; Palkia &middot; preview"
                     data-title="Retexture &mdash; Palkia">
@@ -279,7 +259,7 @@
             <p class="shot__desc vh">We created our own Discord profile picture and Minecraft skin.</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
-          <figure class="shot" data-cat="models">
+          <figure class="shot" data-cat="models" data-tags="mobs">
             <button class="shot__btn frame" type="button"
                     data-label="Retexture &mdash; Rayquaza &middot; preview"
                     data-title="Retexture &mdash; Rayquaza">
@@ -287,6 +267,468 @@
             </button>
             <figcaption>Retexture &mdash; Rayquaza</figcaption>
             <p class="shot__desc vh">Galaxy-theme retexture of the Pok&eacute;mon &lsquo;Rayquaza&rsquo;, for a commission. The first pair shows the regular galaxy theme, the second the shiny galaxy theme.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Loot boxes &amp; robot capsules &middot; preview"
+                    data-title="Loot boxes &amp; robot capsules">
+              <img data-slot src="assets/portfolio/7_items_boxes.png" alt="Eight colorful loot-box and robot-capsule models, including arcane, armor, pet and resource boxes." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Loot boxes &amp; robot capsules</figcaption>
+            <p class="shot__desc vh">A collection of loot boxes and robot capsules with distinct colors, materials and silhouettes for each item.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Arcane rune collection &middot; preview"
+                    data-title="Arcane rune collection">
+              <img data-slot src="assets/portfolio/8_items_runes.png" alt="Six stone rune models with blue, green, gold, purple and pink symbols." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Arcane rune collection</figcaption>
+            <p class="shot__desc vh">Six arcane runes representing energize, wisdom, expedite, impact, prosperity and radiance.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Hot-air balloon &middot; preview"
+                    data-title="Hot-air balloon">
+              <img data-slot src="assets/portfolio/9_balloon.png" alt="Red hot-air balloon model with a wooden basket, shown from two angles." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Hot-air balloon</figcaption>
+            <p class="shot__desc vh">A red balloon with gold trim, suspension ropes and a wooden basket, presented from multiple angles.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Arcane beacon &middot; preview"
+                    data-title="Arcane beacon">
+              <img data-slot src="assets/portfolio/9_beacon.png" alt="Floating mechanical beacon model with cyan crystals and circular metal platforms." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Arcane beacon</figcaption>
+            <p class="shot__desc vh">A floating beacon built around glowing cyan crystals, layered platforms and suspended mechanical details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Mining driller &middot; preview"
+                    data-title="Mining driller">
+              <img data-slot src="assets/portfolio/9_driller.png" alt="Orange mining machine with a large spiral drill, shown from three angles." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Mining driller</figcaption>
+            <p class="shot__desc vh">An industrial drilling machine with an orange housing, metal supports and a spiral drill bit.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Enchantment workshop &middot; preview"
+                    data-title="Enchantment workshop">
+              <img data-slot src="assets/portfolio/9_enchanting.png" alt="Stone enchantment station with glowing green runes, books, scrolls and stacked crates." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Enchantment workshop</figcaption>
+            <p class="shot__desc vh">An enchanting station surrounded by books, scrolls and storage crates, with a stone arch and glowing rune details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props weapons" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Mortar &amp; ammunition &middot; preview"
+                    data-title="Mortar &amp; ammunition">
+              <img data-slot src="assets/portfolio/9_mortar.png" alt="Mortar model with a glowing orange barrel, metal supports and several ammunition designs." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Mortar &amp; ammunition</figcaption>
+            <p class="shot__desc vh">A heavy mortar with modular supports and a set of block-shaped ammunition designs.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Signal station &middot; preview"
+                    data-title="Signal station">
+              <img data-slot src="assets/portfolio/9_signaler.png" alt="Green communications station with a metal dish and orange signal components." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Signal station</figcaption>
+            <p class="shot__desc vh">A compact signal station with an angled dish, layered base and industrial panel details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Tesla tower &middot; preview"
+                    data-title="Tesla tower">
+              <img data-slot src="assets/portfolio/9_tesla.png" alt="Wood and metal Tesla tower with blue electrical arcs, shown from multiple angles." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Tesla tower</figcaption>
+            <p class="shot__desc vh">A Tesla tower combining timber supports, metal braces and a bright electrical coil.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="UFO model &middot; preview"
+                    data-title="UFO model">
+              <img data-slot src="assets/portfolio/9_ufo.png" alt="Dark saucer-shaped spacecraft with cyan panels, shown from above and below." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>UFO model</figcaption>
+            <p class="shot__desc vh">A flying saucer with layered armor, cyan lighting and detailed top and underside views.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Village well &middot; preview"
+                    data-title="Village well">
+              <img data-slot src="assets/portfolio/9_well.png" alt="Stone village well with a red tiled roof, moss, pumpkins and a wooden crank." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Village well</figcaption>
+            <p class="shot__desc vh">A rustic village well with a tiled roof, weathered stonework, a wooden crank and seasonal decoration.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Mechanical wheel &middot; preview"
+                    data-title="Mechanical wheel">
+              <img data-slot src="assets/portfolio/9_wheelie.png" alt="Large wooden wheel held in a metal frame with cyan accents." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Mechanical wheel</figcaption>
+            <p class="shot__desc vh">A mechanical wheel assembly with wooden spokes, metal supports and cyan details, shown from three angles.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Christmas models &amp; props &middot; preview"
+                    data-title="Christmas models &amp; props">
+              <img data-slot src="assets/portfolio/10_christmas_stuff.png" alt="Christmas-themed models including candy canes, penguins, festive pets, a character and ornate gates." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Christmas models &amp; props</figcaption>
+            <p class="shot__desc vh">A Christmas collection of festive characters, pets, signs, candy canes and decorative gates.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="props weapons" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Halloween models &amp; props &middot; preview"
+                    data-title="Halloween models &amp; props">
+              <img data-slot src="assets/portfolio/10_halloween_stuff.png" alt="Halloween-themed sign, backpack, masks, character models and colorful weapons." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Halloween models &amp; props</figcaption>
+            <p class="shot__desc vh">A Halloween collection bringing together seasonal props, accessories, character designs and weapons.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Ice guardian boss &middot; preview"
+                    data-title="Ice guardian boss">
+              <img data-slot src="assets/portfolio/9_boss.png" alt="Armored ice guardian with blue crystal spikes, a large shield and a crystal weapon." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Ice guardian boss</figcaption>
+            <p class="shot__desc vh">An ice-themed boss with layered armor, crystal spikes and matching equipment, presented from multiple angles.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Ice boss &mdash; poses &amp; details &middot; preview"
+                    data-title="Ice boss &mdash; poses &amp; details">
+              <img data-slot src="assets/portfolio/9_boss_2.png" alt="Ice-themed MythicMobs boss shown in three poses and a close-up view." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Ice boss &mdash; poses &amp; details</figcaption>
+            <p class="shot__desc vh">A pose sheet for the ice-themed boss made for MythicMobs, including a close-up of the armor and crystal details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Horned hammer beasts &middot; preview"
+                    data-title="Horned hammer beasts">
+              <img data-slot src="assets/portfolio/10_mobs.png" alt="Red and pale horned creatures carrying large hammers, shown in several poses." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Horned hammer beasts</figcaption>
+            <p class="shot__desc vh">Horned creature models with heavy hammers, contrasting color variants and several presentation poses.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Ember dragon &middot; preview"
+                    data-title="Ember dragon">
+              <img data-slot src="assets/portfolio/10_mobs_1.png" alt="Dark winged dragon with glowing orange horns, spine and tail details." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Ember dragon</figcaption>
+            <p class="shot__desc vh">An ember-themed dragon with broad wings, a segmented body and glowing orange accents.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Corrupted beasts &amp; bats &middot; preview"
+                    data-title="Corrupted beasts &amp; bats">
+              <img data-slot src="assets/portfolio/10_mobs_2.png" alt="Blue armored beasts and dark flying bats with purple wing membranes." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Corrupted beasts &amp; bats</figcaption>
+            <p class="shot__desc vh">A creature collection pairing armored ground beasts with flying bats and contrasting texture details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Insect swarm &middot; preview"
+                    data-title="Insect swarm">
+              <img data-slot src="assets/portfolio/10_mobs_3.png" alt="Several yellow and dark insect models with segmented bodies, wings and antennae." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Insect swarm</figcaption>
+            <p class="shot__desc vh">A swarm of insect designs with distinct body shapes, wing structures and yellow-and-black textures.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Companion pet collection &middot; preview"
+                    data-title="Companion pet collection">
+              <img data-slot src="assets/portfolio/10_mobs_4.png" alt="Eight pet models: mummy, golem, panda, snake, fox, ghost, penguin and token robot." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Companion pet collection</figcaption>
+            <p class="shot__desc vh">A companion collection featuring a mummy, golem, panda, snake, fox, ghost, penguin and token robot.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Rune stone golem &middot; preview"
+                    data-title="Rune stone golem">
+              <img data-slot src="assets/portfolio/10_mobs_5.png" alt="Large stone golem with cyan runes, moss and detached stone fists." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Rune stone golem</figcaption>
+            <p class="shot__desc vh">A stone golem with glowing cyan runes, weathered surfaces, moss and heavy articulated limbs.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Three-headed hydra &middot; preview"
+                    data-title="Three-headed hydra">
+              <img data-slot src="assets/portfolio/10_mobs_6.png" alt="Dark three-headed hydra with orange and blue accents, horns, claws and a long tail." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Three-headed hydra</figcaption>
+            <p class="shot__desc vh">A three-headed hydra with contrasting elemental accents, large claws and a long segmented tail.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Fantasy NPC collection &middot; preview"
+                    data-title="Fantasy NPC collection">
+              <img data-slot src="assets/portfolio/10_npcs_1.png" alt="Eight human NPC models wearing varied fantasy outfits, hats and accessories." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Fantasy NPC collection</figcaption>
+            <p class="shot__desc vh">A cast of fantasy NPCs with varied outfits, headwear, hairstyles and equipment.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Guards &amp; adventurers &middot; preview"
+                    data-title="Guards &amp; adventurers">
+              <img data-slot src="assets/portfolio/10_npcs_2.png" alt="Armored guards and fantasy adventurers carrying a bow, tools and supplies." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Guards &amp; adventurers</figcaption>
+            <p class="shot__desc vh">NPC designs for guards and adventurers, with armor, weapons and role-specific accessories.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Fantasy swords &amp; spears &middot; preview"
+                    data-title="Fantasy swords &amp; spears">
+              <img data-slot src="assets/portfolio/11_weapons_1.png" alt="Eight custom swords and spears with steel, ivory, gold, purple and orange designs." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Fantasy swords &amp; spears</figcaption>
+            <p class="shot__desc vh">A fantasy weapon collection featuring a nodachi, small sword, Vesptra Stinger, steel sword, ivory spear, omega sword, doom sword and katana.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Containment &amp; toxic weapons &middot; preview"
+                    data-title="Containment &amp; toxic weapons">
+              <img data-slot src="assets/portfolio/11_weapons_2.png" alt="Voxel weapon sheet with containment firearms, a chainsaw, a launcher and toxic weapons." width="1920" height="1080" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Containment &amp; toxic weapons</figcaption>
+            <p class="shot__desc vh">Containment and toxic weapon designs, including firearms, a chainsaw and a launcher, with industrial forms and green accents.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Cryptic, doom &amp; wasteland weapons &middot; preview"
+                    data-title="Cryptic, doom &amp; wasteland weapons">
+              <img data-slot src="assets/portfolio/11_weapons_3.png" alt="Voxel weapon sheet featuring a cryptic gun, doom weapons, wasteland weapons and a toxic staff." width="1920" height="1080" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Cryptic, doom &amp; wasteland weapons</figcaption>
+            <p class="shot__desc vh">A themed weapon collection combining cryptic, doom, wasteland and toxic designs across ranged and melee forms.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Eclipse &amp; wasteland weapons &middot; preview"
+                    data-title="Eclipse &amp; wasteland weapons">
+              <img data-slot src="assets/portfolio/11_weapons_4.png" alt="Voxel weapons including a containment rod, blood scythe, eclipse firearms and wasteland melee weapons." width="1920" height="1080" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Eclipse &amp; wasteland weapons</figcaption>
+            <p class="shot__desc vh">A weapon sheet pairing eclipse firearms with a blood scythe, containment rod and wasteland melee designs.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Medieval &amp; omega weapons &middot; preview"
+                    data-title="Medieval &amp; omega weapons">
+              <img data-slot src="assets/portfolio/11_weapons_5.png" alt="Voxel weapons with medieval and omega designs, including rifles, an axe, a dagger and a pistol." width="1920" height="1080" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Medieval &amp; omega weapons</figcaption>
+            <p class="shot__desc vh">A collection of medieval and omega weapon designs with contrasting materials, decorative details and silhouettes.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="models" data-tags="weapons" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Tempest &amp; toxic weapons &middot; preview"
+                    data-title="Tempest &amp; toxic weapons">
+              <img data-slot src="assets/portfolio/11_weapons_6.png" alt="Blue tempest rifle, sniper, sword and trident, alongside a green toxic grenade." width="1920" height="1080" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Tempest &amp; toxic weapons</figcaption>
+            <p class="shot__desc vh">A tempest weapon set built around blue crystal details, accompanied by a toxic grenade design.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="models mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Parasite-infected villager &middot; preview"
+                    data-title="Parasite-infected villager"
+                    data-full-src="assets/portfolio/11_animated_1.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_1.webp" alt="Animated parasite-infected villager showing idle, walk, attack, death and transformation states." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Parasite-infected villager</figcaption>
+            <p class="shot__desc vh">A parasite-infected villager animation sheet showing idle, walking, attacks, death and infection stages.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="models mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Lunar shadow mob &amp; fish &middot; preview"
+                    data-title="Lunar shadow mob &amp; fish"
+                    data-full-src="assets/portfolio/11_animated_2.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_2.webp" alt="Animated lunar shadow creature and fish showing movement, attacks and other animation states." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Lunar shadow mob &amp; fish</figcaption>
+            <p class="shot__desc vh">A lunar shadow mob and fish animation showcase, including idle, movement, attack and death sequences.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="models mobs" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Candy pet &middot; preview"
+                    data-title="Candy pet"
+                    data-full-src="assets/portfolio/11_animated_3.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_3.webp" alt="Animated candy-themed pet showing spawn, idle, walk, activation and despawn states." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Candy pet</figcaption>
+            <p class="shot__desc vh">A colorful candy pet with spawn, idle, walking, activation and despawn animations.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="models weapons" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Animated fantasy weapons &middot; preview"
+                    data-title="Animated fantasy weapons"
+                    data-full-src="assets/portfolio/11_animated_4.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_4.webp" alt="Animated showcase of eight fantasy weapons including axes, swords and an ice dagger." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Animated fantasy weapons</figcaption>
+            <p class="shot__desc vh">An animated presentation of custom weapons including a water axe, Baruka, Bloodmoon, Krily, boss axe, SAO sword, fire sword and ice dagger.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="models props" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Animated prison crates &middot; preview"
+                    data-title="Animated prison crates"
+                    data-full-src="assets/portfolio/11_animated_5.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_5.webp" alt="Four colorful prison crate models shown in animated closed and open states." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Animated prison crates</figcaption>
+            <p class="shot__desc vh">Four prison crate designs with animated opening sequences and distinct color palettes.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="animations" data-tags="pixel ranks" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Rank-up animations &middot; preview"
+                    data-title="Rank-up animations"
+                    data-full-src="assets/portfolio/11_animated_6.gif">
+              <img data-slot src="assets/portfolio/previews/11_animated_6.webp" alt="Animated rank-up graphics for coal, iron, gold, netherite and four prestige levels." width="480" height="480" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Rank-up animations</figcaption>
+            <p class="shot__desc vh">Animated rank-up graphics covering coal, iron, gold, netherite and four prestige tiers.</p>
+            <span class="shot__flag">Animated</span>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-tags="ranks" data-fit="contain" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Server rank badge collection &middot; preview"
+                    data-title="Server rank badge collection">
+              <img data-slot src="assets/portfolio/12_ranks.png" alt="A grid of colorful server rank badges with shields, stars, gems and crowns." width="1920" height="1090" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Server rank badge collection</figcaption>
+            <p class="shot__desc vh">A collection of server rank badges with varied emblems, color palettes and decorative frames.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-tags="banners" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Nether &amp; winter banners &middot; preview"
+                    data-title="Nether &amp; winter banners">
+              <img data-slot src="assets/portfolio/13_banners.png" alt="Two pixel-art banners featuring a Nether scene and a snowy winter landscape." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Nether &amp; winter banners</figcaption>
+            <p class="shot__desc vh">A pair of detailed pixel-art banners contrasting a fiery Nether environment with a snowy winter scene.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-tags="banners" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Prison &amp; skyblock banner &middot; preview"
+                    data-title="Prison &amp; skyblock banner">
+              <img data-slot src="assets/portfolio/13_banner_2.png" alt="Pixel-art banner split between a red prison scene and a blue skyblock island." width="1000" height="1000" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Prison &amp; skyblock banner</figcaption>
+            <p class="shot__desc vh">A split-scene banner presenting prison and skyblock themes with characters, icons and environmental details.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-tags="banners" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Royal avatar banner &middot; preview"
+                    data-title="Royal avatar banner">
+              <img data-slot src="assets/portfolio/13_banners_3.png" alt="Pixel-art character wearing a crown against a warm orange sky and brick foreground." width="1000" height="800" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Royal avatar banner</figcaption>
+            <p class="shot__desc vh">A royal avatar banner with a crowned character, warm horizontal sky details and a brick foreground.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="pixel" data-tags="banners" data-fit="contain">
+            <button class="shot__btn frame" type="button"
+                    data-label="Festive avatar banner &middot; preview"
+                    data-title="Festive avatar banner">
+              <img data-slot src="assets/portfolio/13_banners_4.png" alt="Pixel-art character wearing a Santa hat beside a snowman against a blue snowy background." width="1000" height="800" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Festive avatar banner</figcaption>
+            <p class="shot__desc vh">A festive avatar banner with a Santa hat, snowman, falling snow and a cool blue palette.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="apps" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="Golem &mdash; Geometry Apprentice &middot; preview"
+                    data-title="Golem &mdash; Geometry Apprentice">
+              <img data-slot src="assets/portfolio/7_golem.png" alt="Golem desktop app showing a Blockbench model library with tags and a live 3D preview &mdash; One Raid Studio" width="1918" height="1029" loading="lazy" decoding="async">
+            </button>
+            <figcaption>Golem &mdash; Geometry Apprentice</figcaption>
+            <p class="shot__desc vh">A secret ongoing project of the studio, for experimentation with 3D models and AI.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="apps" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="ORS Hub &middot; preview"
+                    data-title="ORS Hub">
+              <img data-slot src="assets/portfolio/8_orshub.png" alt="ORS Hub desktop app showing a searchable grid of twelve internal studio tools &mdash; One Raid Studio" width="2143" height="1342" loading="lazy" decoding="async">
+            </button>
+            <figcaption>ORS Hub</figcaption>
+            <p class="shot__desc vh">The studio&rsquo;s internal tool launcher. We have a wide range of tools at our disposal that make our lives easier.</p>
+            <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
+          </figure>
+          <figure class="shot" data-cat="websites" data-span="2x1">
+            <button class="shot__btn frame" type="button"
+                    data-label="GuyZ3RO &mdash; personal site &middot; preview"
+                    data-title="GuyZ3RO &mdash; personal site">
+              <img data-slot src="assets/portfolio/9_guyzero_website.png" alt="GuyZ3RO developer portfolio website homepage &mdash; One Raid Studio" width="1884" height="904" loading="lazy" decoding="async">
+            </button>
+            <figcaption>GuyZ3RO &mdash; personal site</figcaption>
+            <p class="shot__desc vh">Of course we made our own websites!</p>
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
           <figure class="shot" data-cat="plugins">
@@ -323,7 +765,7 @@
             <span class="shot__zoom" aria-hidden="true">View &#9656;</span>
           </figure>
 
-<p class="gallery__empty" hidden>Nothing in this category yet — try another filter.</p>
+          <p class="gallery__empty" hidden>Nothing in this category yet — try another filter.</p>
         </div>
       </div>
     </section>
@@ -355,6 +797,7 @@
         </div>
         <h2 class="h3" id="lb-title" data-lb-title></h2>
         <p class="lightbox__desc" data-lb-desc></p>
+        <div class="lightbox__tags tags" data-lb-tags hidden></div>
       </div>
     </div>
   </div>

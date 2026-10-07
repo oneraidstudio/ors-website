@@ -286,6 +286,8 @@
      already does momentum there and overriding it feels wrong. When the
      engine is off, CSS scroll-behavior handles anchors natively.        */
   var sTarget = window.scrollY;
+  var sLast = sTarget;
+  var sHeight = root.scrollHeight;
   var sRaf = null;
   var EASE_AMOUNT = 0.18;
 
@@ -301,22 +303,47 @@
   function sJump(y) {
     try { window.scrollTo({ top: y, left: window.scrollX, behavior: 'instant' }); }
     catch (err) { window.scrollTo(0, y); }
+    sLast = window.scrollY;
+    sHeight = root.scrollHeight;
   }
   // (2) Bail the moment the engine is switched off, and resync the target.
   function stopSmooth() {
     if (sRaf) cancelAnimationFrame(sRaf);
     sRaf = null;
-    sTarget = window.scrollY;
+    sTarget = sLast = window.scrollY;
+    sHeight = root.scrollHeight;
+  }
+  function syncSmooth() {
+    var cur = window.scrollY;
+    var height = root.scrollHeight;
+    if (sRaf && cur !== sLast && height !== sHeight) {
+      // The shrinking sticky header can shift the viewport through browser
+      // scroll anchoring. Preserve the remaining wheel movement from there.
+      sTarget += cur - sLast;
+      sLast = cur;
+    } else if (!sRaf || cur !== sLast) {
+      stopSmooth();
+    }
+    sHeight = height;
   }
   function sStep() {
     if (!smoothOn()) { stopSmooth(); return; }
+    syncSmooth();
+    if (!sRaf) return;
     var cur = window.scrollY;
+    // Filtering or resizing can make the previous destination unreachable.
+    sTarget = Math.max(0, Math.min(sTarget, maxScroll()));
     var delta = sTarget - cur;
-    if (Math.abs(delta) < 0.5) { sJump(sTarget); sRaf = null; return; }
+    if (Math.abs(delta) < 0.5) { sJump(sTarget); stopSmooth(); return; }
     sJump(cur + delta * EASE_AMOUNT);
+    // Some browsers round subpixel scrolls. Finish instead of retrying the
+    // same position forever and keeping an obsolete destination active.
+    if (window.scrollY === cur) { sJump(sTarget); stopSmooth(); return; }
     sRaf = requestAnimationFrame(sStep);
   }
-  function scrollToY(y) {
+  function scrollToY(y, relative) {
+    syncSmooth();
+    if (relative) y += sTarget;
     sTarget = Math.max(0, Math.min(y, maxScroll()));
     if (!sRaf) sRaf = requestAnimationFrame(sStep);
   }
@@ -327,13 +354,13 @@
     if (e.target.closest && e.target.closest('.drawer, .lightbox')) return;
     e.preventDefault();
     var step = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
-    scrollToY(sTarget + step);
+    scrollToY(step, true);
   }, { passive: false });
 
   // Keep the target honest when something else scrolls: keyboard, scrollbar
   // drag, browser restore.
   window.addEventListener('scroll', function () {
-    if (!sRaf) sTarget = window.scrollY;
+    syncSmooth();
   }, { passive: true });
 
   // Anchors go through the same engine so there is only ever one scroller.
@@ -395,9 +422,10 @@
     }, { passive: true });
   }
 
-  /* Shared with portfolio.js so the lightbox locks the page the same way
-     the drawer does, instead of reimplementing it. */
+  /* Filtering can cancel pending easing, and the lightbox uses the same
+     shell lock as the drawer. */
   window.ORS = window.ORS || {};
+  window.ORS.resetScroll = stopSmooth;
   window.ORS.lockShell = function (on) {
     setShellInert(on);
     body.classList.toggle('is-locked', on);

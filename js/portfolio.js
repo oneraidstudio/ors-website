@@ -32,9 +32,9 @@
   var empty = document.querySelector('.gallery__empty');
 
   /* Labels are read off the buttons themselves rather than kept in a list
-     here, so a category can never be half-registered. To add one: drop in a
-     <button class="filter" data-filter="key">Label</button> and tag tiles
-     with data-cat="key". Nothing in this file or the CSS needs touching. */
+     here. Each tile has one primary data-cat and optional space-separated
+     data-tags for subjects. A filter matches either, so new categories and
+     tags only need a matching filter button and tile attributes. */
   var LABELS = {};
   for (var b = 0; b < btns.length; b++) {
     LABELS[btns[b].getAttribute('data-filter')] =
@@ -43,6 +43,11 @@
 
   function valid(key) {
     return Object.prototype.hasOwnProperty.call(LABELS, key) ? key : 'all';
+  }
+
+  function tagsFor(shot) {
+    var tags = (shot.getAttribute('data-tags') || '').trim();
+    return tags ? tags.split(/\s+/) : [];
   }
 
   function visibleShots() {
@@ -66,7 +71,8 @@
     // selector, which had to be extended by hand for every new filter.
     var shots = gallery.querySelectorAll('.shot');
     for (var s = 0; s < shots.length; s++) {
-      if (filter === 'all' || shots[s].getAttribute('data-cat') === filter) {
+      if (filter === 'all' || shots[s].getAttribute('data-cat') === filter ||
+          tagsFor(shots[s]).indexOf(filter) !== -1) {
         shots[s].removeAttribute('data-hidden');
       } else {
         shots[s].setAttribute('data-hidden', '');
@@ -81,6 +87,9 @@
       history.replaceState({ filter: filter }, '',
         filter === 'all' ? location.pathname : location.pathname + '?filter=' + filter);
     }
+    // The gallery's new height can move the browser's scroll position.
+    // Cancel any wheel easing and resume from that actual position.
+    if (window.ORS && window.ORS.resetScroll) window.ORS.resetScroll();
   }
 
   for (var i = 0; i < btns.length; i++) {
@@ -101,6 +110,7 @@
   var lbMedia = box.querySelector('.lightbox__media');
   var lbTitle = box.querySelector('[data-lb-title]');
   var lbDesc = box.querySelector('[data-lb-desc]');
+  var lbTags = box.querySelector('[data-lb-tags]');
   var lbCat = box.querySelector('[data-lb-cat]');
   var lbCounter = box.querySelector('[data-lb-counter]');
   var lbFlag = box.querySelector('[data-lb-flag]');
@@ -136,7 +146,8 @@
     lbMedia.removeAttribute('data-empty');
     lbMedia.setAttribute('data-label', (btn.getAttribute('data-title') || '') + ' — image not added yet');
     lbImg.style.display = '';
-    lbImg.src = img ? img.getAttribute('src') : '';
+    // Grid previews stay small; a tile may open its original animated image.
+    lbImg.src = btn.getAttribute('data-full-src') || (img ? img.getAttribute('src') : '');
     lbImg.alt = img ? (img.getAttribute('alt') || '') : '';
 
     lbTitle.textContent = btn.getAttribute('data-title') || '';
@@ -146,9 +157,25 @@
     var descEl = shot.querySelector('.shot__desc');
     lbDesc.textContent = descEl ? descEl.textContent.trim() : '';
     lbCat.textContent = LABELS[shot.getAttribute('data-cat')] || '';
-    // A tile only carries a .shot__flag when it needs qualifying ("Coming
-    // soon"). Finished work carries none, so the badge falls back to the
-    // studio name rather than labelling real pieces as something they aren't.
+    if (lbTags) {
+      lbTags.textContent = '';
+      var tags = tagsFor(shot);
+      var rendered = [];
+      for (var t = 0; t < tags.length; t++) {
+        var tag = tags[t];
+        if (tag === shot.getAttribute('data-cat') || tag === 'all' ||
+            !Object.prototype.hasOwnProperty.call(LABELS, tag) ||
+            rendered.indexOf(tag) !== -1) continue;
+        var chip = document.createElement('span');
+        chip.className = 'tag';
+        chip.textContent = LABELS[tag];
+        lbTags.appendChild(chip);
+        rendered.push(tag);
+      }
+      lbTags.hidden = rendered.length === 0;
+    }
+    // Tiles can flag animated previews or work that is coming soon.
+    // Unflagged pieces show the studio name.
     if (lbFlag) {
       var flagEl = shot.querySelector('.shot__flag');
       lbFlag.textContent = flagEl ? flagEl.textContent.trim() : 'One Raid Studio';
@@ -170,6 +197,7 @@
   function close() {
     if (!box.classList.contains('is-open')) return;
     box.classList.remove('is-open');
+    lbImg.removeAttribute('src');
     lock(false);
     if (lastFocus && lastFocus.focus) lastFocus.focus();
     lastFocus = null;

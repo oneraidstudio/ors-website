@@ -70,6 +70,7 @@
   padding:0;border:0;background:none;cursor:pointer;
 }
 .shot__btn img{width:100%;height:100%;object-fit:cover}
+.shot[data-fit="contain"] .shot__btn img{object-fit:contain}
 .shot__btn::after{
   content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,transparent 55%,rgba(11,4,16,.55) 100%);
@@ -80,6 +81,7 @@
 
 .shot figcaption{
   position:absolute;left:8px;bottom:8px;pointer-events:none;
+  max-width:calc(100% - 88px);overflow-wrap:anywhere;line-height:1.5;
   font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
   color:var(--text);background:rgba(11,4,16,.88);border:1px solid var(--border);padding:5px 8px;
 }
@@ -93,15 +95,14 @@
 .shot:hover .shot__zoom,
 .shot__btn:focus-visible ~ .shot__zoom{opacity:1;transform:none}
 
-/* Only a tile that needs qualifying carries a flag — an unbuilt slot reads
-   "Coming soon" on the tile itself, so a placeholder is never mistaken for
-   finished work. Real pieces carry no flag at all. */
+/* Flags identify animated previews and work that is coming soon. */
 .shot__flag{
   position:absolute;left:8px;top:8px;z-index:1;pointer-events:none;
   font-family:var(--mono);font-weight:700;font-size:.58rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--white);
   background:var(--brand-red-deep);border:1px solid var(--neon-red);padding:4px 7px;
 }
+.shot[data-cat="animations"] .shot__flag{left:auto;right:8px}
 
 /* Filtering is driven by portfolio.js, which flags non-matching tiles with
    data-hidden. This single rule covers every category — previously each one
@@ -144,6 +145,7 @@
 .lightbox__media img{width:100%;height:100%;object-fit:contain}
 .lightbox__body{display:flex;flex-direction:column;gap:var(--sp-3);padding:var(--sp-5)}
 .lightbox__desc{max-width:70ch;font-size:var(--fs-sm);line-height:1.6;color:var(--text-muted)}
+.lightbox__tags[hidden]{display:none}
 .lightbox__meta{display:flex;flex-wrap:wrap;gap:var(--sp-3);align-items:center}
 
 .lightbox__close{
