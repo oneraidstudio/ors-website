@@ -287,9 +287,15 @@ html{scrollbar-color:var(--brand-red-lit) var(--surface);scrollbar-width:auto}
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
   border-bottom:1px solid var(--border);
-  transition:padding var(--dur) var(--ease),background var(--dur) var(--ease);
+  transition:padding var(--dur) var(--ease),margin-bottom var(--dur) var(--ease),background var(--dur) var(--ease);
 }
-.hdr.is-scrolled{padding-block:8px;background:rgba(11,4,16,.96)}
+/* Keep the header's flow height steady as its visible padding compacts,
+   so browser scroll anchoring cannot fight wheel scrolling near the top. */
+.hdr.is-scrolled{
+  padding-block:8px;padding-top:max(8px,env(safe-area-inset-top));
+  margin-bottom:calc(6px + max(14px,env(safe-area-inset-top)) - max(8px,env(safe-area-inset-top)));
+  background:rgba(11,4,16,.96);
+}
 .hdr__inner{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-5)}
 
 .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;min-height:var(--tap)}

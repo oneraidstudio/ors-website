@@ -287,7 +287,6 @@
      engine is off, CSS scroll-behavior handles anchors natively.        */
   var sTarget = window.scrollY;
   var sLast = sTarget;
-  var sHeight = root.scrollHeight;
   var sRaf = null;
   var EASE_AMOUNT = 0.18;
 
@@ -304,32 +303,16 @@
     try { window.scrollTo({ top: y, left: window.scrollX, behavior: 'instant' }); }
     catch (err) { window.scrollTo(0, y); }
     sLast = window.scrollY;
-    sHeight = root.scrollHeight;
   }
   // (2) Bail the moment the engine is switched off, and resync the target.
   function stopSmooth() {
     if (sRaf) cancelAnimationFrame(sRaf);
     sRaf = null;
     sTarget = sLast = window.scrollY;
-    sHeight = root.scrollHeight;
-  }
-  function syncSmooth() {
-    var cur = window.scrollY;
-    var height = root.scrollHeight;
-    if (sRaf && cur !== sLast && height !== sHeight) {
-      // The shrinking sticky header can shift the viewport through browser
-      // scroll anchoring. Preserve the remaining wheel movement from there.
-      sTarget += cur - sLast;
-      sLast = cur;
-    } else if (!sRaf || cur !== sLast) {
-      stopSmooth();
-    }
-    sHeight = height;
   }
   function sStep() {
-    if (!smoothOn()) { stopSmooth(); return; }
-    syncSmooth();
-    if (!sRaf) return;
+    // Yield to native scrolling and focus changes.
+    if (!smoothOn() || window.scrollY !== sLast) { stopSmooth(); return; }
     var cur = window.scrollY;
     // Filtering or resizing can make the previous destination unreachable.
     sTarget = Math.max(0, Math.min(sTarget, maxScroll()));
@@ -342,7 +325,7 @@
     sRaf = requestAnimationFrame(sStep);
   }
   function scrollToY(y, relative) {
-    syncSmooth();
+    if (!sRaf || window.scrollY !== sLast) stopSmooth();
     if (relative) y += sTarget;
     sTarget = Math.max(0, Math.min(y, maxScroll()));
     if (!sRaf) sRaf = requestAnimationFrame(sStep);
@@ -360,7 +343,7 @@
   // Keep the target honest when something else scrolls: keyboard, scrollbar
   // drag, browser restore.
   window.addEventListener('scroll', function () {
-    syncSmooth();
+    if (!sRaf || window.scrollY !== sLast) stopSmooth();
   }, { passive: true });
 
   // Anchors go through the same engine so there is only ever one scroller.
